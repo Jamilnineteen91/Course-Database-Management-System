@@ -10,7 +10,7 @@ A client-user friendly database application.
 - MySQL (backend database)
 
 ## Tasks
-- [ ] review MySQL
+- [x] review MySQL
 - [ ] review Tkinter
 - [ ] Design Database
 - [ ] Code Front-End
