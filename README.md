@@ -11,8 +11,8 @@ A client-user friendly database application.
 
 ## Tasks
 - [x] review MySQL
-- [ ] review Tkinter
-- [ ] Design Database
+- [x] review Tkinter
+- [x] Design Database
 - [ ] Code Front-End
 - [ ] Code Back-end functions
 - [ ] Run tests
