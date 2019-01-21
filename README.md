@@ -13,7 +13,9 @@ A client-user friendly database application.
 - [x] review MySQL
 - [x] review Tkinter
 - [x] Design Database
+- [ ] Re-design Database
 - [ ] Code Front-End
+- [ ] add img Front-end img to readme
 - [ ] Code Back-end functions
 - [ ] Run tests
 - [ ] Convert into .exe and launch
