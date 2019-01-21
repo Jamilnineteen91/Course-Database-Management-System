@@ -20,3 +20,7 @@ A client-user friendly database application.
 - [ ] Run tests
 - [ ] Convert into .exe and launch
  
+## Bugs
+- [ ] Add swith for student/teacher form
+- [ ] Re-size List Box
+- [ ] Re-size Description entry box
