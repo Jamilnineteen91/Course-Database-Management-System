@@ -24,3 +24,9 @@ A client-user friendly database application.
 - [ ] Add swith for student/teacher form
 - [ ] Re-size List Box
 - [ ] Re-size Description entry box
+
+## What I learned
+
+- How to build an ERB
+- How to construct a GUI 
+-How to convert a .py file to an .exe file
