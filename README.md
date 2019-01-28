@@ -9,24 +9,8 @@ A client-user friendly database application.
 - Tkinter (built in python GUI library)
 - MySQL (backend database)
 
-## Tasks
-- [x] review MySQL
-- [x] review Tkinter
-- [x] Design Database
-- [ ] Re-design Database
-- [ ] Code Front-End
-- [ ] add img Front-end img to readme
-- [ ] Code Back-end functions
-- [ ] Run tests
-- [ ] Convert into .exe and launch
- 
-## Bugs
-- [ ] Add swith for student/teacher form
-- [ ] Re-size List Box
-- [ ] Re-size Description entry box
-
 ## What I learned
 
 - How to build an ERB
 - How to construct a GUI 
--How to convert a .py file to an .exe file
+- How to convert a .py file to an .exe file
