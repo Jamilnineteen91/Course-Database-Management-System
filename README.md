@@ -13,6 +13,7 @@ A client-user friendly database application.
 - PyQt5 (python GUI library)
 - MySQL (backend database)
 - Qt Designer (designed front-end)
+- [Visual Paradigm](https://online.visual-paradigm.com/) (designed the ERB)
 
 ## What I learned
 
