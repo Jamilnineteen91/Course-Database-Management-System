@@ -10,11 +10,12 @@ A client-user friendly database application.
 
 
 ## Built With
-- Tkinter (built in python GUI library)
+- PyQt5 (python GUI library)
 - MySQL (backend database)
+- Qt Designer (designed front-end)
 
 ## What I learned
 
 - How to build an ERB
 - How to construct a GUI 
-- How to convert a .py file to an .exe file
+- How to create a desktop application
