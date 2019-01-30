@@ -2,7 +2,7 @@
 A client-user friendly database application.
 
 ## Front-end Design
-<img width="1175" alt="screen shot 2019-01-28 at 5 06 02 pm" src="https://user-images.githubusercontent.com/23427623/51873551-40d46680-2323-11e9-9ec2-0f26ad28cd50.png">
+<img width="1171" alt="ui_coursedb_design" src="https://user-images.githubusercontent.com/23427623/52012759-07296a00-24a1-11e9-9749-6a4517c8bd82.png">
 
 
 ## Database Schema (ERD)
