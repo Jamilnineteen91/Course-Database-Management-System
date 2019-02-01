@@ -217,11 +217,13 @@ class Ui_MainWindow(object):
         self.searchButton.setText(_translate("MainWindow", "Search"))
         self.deleteButton.setText(_translate("MainWindow", "Delete"))
 
+
 if __name__ == "__main__":
     import sys
-    app = QtGui.QGuiApplication(sys.argv)
-    MainWindow = QtGui.QWindow()
+    app = QtWidgets.QApplication(sys.argv)
+    MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
+
