@@ -24,15 +24,14 @@ from mysql.connector import errorcode
 # 	print(tb)
 
 class newDatabase:
-	def __init__(self, database):
+
+	def __init__(self):
 		self.database = mysql.connector.connect(
 			host="localhost",
 			user="root",
 			password="password",
-			database="testdb2"
 		)
 		self.cursor=self.database.cursor()
-		self.ConnectionTest()
 
 
 	def ConnectionTest(self):
@@ -41,8 +40,8 @@ class newDatabase:
 		except Exception as e:
 			print(e)
 
-
+def main():
+	newDatabase()
 
 if __name__ == '__main__':
-	db='test2DB'
-	dbu=newDatabase(db)
+	main()
