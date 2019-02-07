@@ -1,27 +1,5 @@
 
 import mysql.connector
-from mysql.connector import errorcode
-
-# mydb = mysql.connector.connect(
-# 	host="localhost",
-# 	user="root",
-# 	password="password",
-# 	database="testdb"
-# 	)
-#
-# cur = mydb.cursor()
-#
-#
-# cur.execute("""CREATE TABLE students(
-# 			first_name VARCHAR(30),
-# 			last_name VARCHAR(30),
-# 			age INT(10)
-# 			)
-# 			""")
-# cur.execute("""SHOW TABLES""")
-#
-# for tb in cur:
-# 	print(tb)
 
 class newDatabase:
 
@@ -31,12 +9,14 @@ class newDatabase:
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="password",
+				password="PASSWORD",
 			)
 
 			self.cursor = self.database.cursor()
 			self.CreateDatabase()
 			self.CreateStudentTable()
+			self.CreateTeacherTable()
+			self.CreateCourseTable()
 
 
 		except mysql.connector.Error as e:
@@ -54,7 +34,7 @@ class newDatabase:
 	def CreateStudentTable(self):
 		self.cursor.execute("USE courseDB")
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS student(
-							student_id INT(10) NOT NULL PRIMARY KEY,
+							student_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
 							first_name VARCHAR(30) NOT NULL,
 							last_name VARCHAR(30) NOT NULL,
 							gender ENUM('M','F','Other'),
@@ -68,7 +48,7 @@ class newDatabase:
 	def CreateTeacherTable(self):
 		self.cursor.execute("USE courseDB")
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS teacher(
-							teacher_id INT(10) NOT NULL PRIMARY KEY,
+							teacher_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
 							first_name VARCHAR(30) NOT NULL,
 							last_name VARCHAR(30) NOT NULL,
 							gender ENUM('M','F','Other'),
@@ -84,9 +64,9 @@ class newDatabase:
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS course(
 							course_name VARCHAR(20) NOT NULL,
 							description VARCHAR(60) NOT NULL,
-							course_id INT(10) PRIMARY KEY,
-							teacher_id INT NOT NULL,
-							FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id)""")
+							course_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
+							teacher_id INT(7) UNSIGNED NOT NULL,
+							FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id))""")
 
 
 
