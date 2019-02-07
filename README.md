@@ -20,4 +20,5 @@ A client-user friendly database application.
 - How to build an ERB
 - How to construct a GUI 
 - How to create a desktop application
-- Error handling 
+- Error handling
+- OOP (object oriented programing) 
