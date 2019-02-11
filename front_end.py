@@ -11,7 +11,6 @@ from back_end import *
 
 class Ui_MainWindow(object):
     db=newDatabase()
-    cursor=db.cursor()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -254,7 +253,7 @@ class Ui_MainWindow(object):
 
         elif self.teacherRadioButton.clicked():
             cursor.execute('USE courseDB')
-            cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
+            cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
                             VALUES ({},{},{},{},{},{},{},{},{},{})
                             """).format(self.studentTeacherIDLineEdit.text(),
                                        self.firstNameLineEdit.text(),

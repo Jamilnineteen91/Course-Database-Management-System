@@ -5,11 +5,11 @@ class newDatabase:
 
 	def __init__(self):
 		# This try and except function ensures a connection to the db server
-		try:
+		# try:
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="yafvr8udisspac3exec",
+				password="password",
 			)
 
 			self.cursor = self.database.cursor()
@@ -19,8 +19,8 @@ class newDatabase:
 			self.CreateCourseTable()
 
 
-		except mysql.connector.Error as e:
-			print(e)
+		# except mysql.connector.Error as e:
+		# 	print(e)
 
 
 	def CreateDatabase(self):
@@ -70,7 +70,7 @@ class newDatabase:
 
 
 
-
+print("Imported back_end file!")
 
 
 # def main():
