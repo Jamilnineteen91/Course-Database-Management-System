@@ -239,32 +239,33 @@ class Ui_MainWindow(object):
     def add(self):
         if self.studentRadioButton.clicked():
             cursor.execute('USE courseDB')
-            cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip phone_number)
-                            VALUES (%d, %s, %s, %s, %s, %s, %s, %s, %s, %d, %d)
-                            """ % (''.join(self.firstNameLineEdit.text()),
-                                   ''.join(self.lastNameLineEdit.text()),
-                                   ''.join(self.genderNameLineEdit.text()),
-                                   ''.join(self.addressLineEdit.text()),
-                                   ''.join(self.cityLineEdit.text()),
-                                   ''.join(self.regionLineEdit.text()),
-                                   ''.join(self.countryLineEdit.text()),
-                                   ''.join(self.zipLineEdit.text()),
-                                   ''.join(self.phoneNumberLineEdit.text())
-                                   ))
+            cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
+                            VALUES ({},{},{},{},{},{},{},{},{},{})
+                            """).format(self.studentTeacherIDLineEdit.text(),
+                                       self.firstNameLineEdit.text(),
+                                       self.lastNameLineEdit.text(),
+                                       self.genderNameLineEdit.text(),
+                                       self.addressLineEdit.text(),
+                                       self.cityLineEdit.text(),
+                                       self.regionLineEdit.text(),
+                                       self.countryLineEdit.text(),
+                                       self.zipLineEdit.text(),
+                                       self.phoneNumberLineEdit.text())
 
         elif self.teacherRadioButton.clicked():
             cursor.execute('USE courseDB')
-            cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip phone_number)
-                            VALUES (%d, %s, %s, %s, %s, %s, %s, %s, %s, %d, %d)
-                            """ % (''.join(self.firstNameLineEdit.text()),
-                                   ''.join(self.lastNameLineEdit.text()),
-                                   ''.join(self.genderNameLineEdit.text()),
-                                   ''.join(self.addressLineEdit.text()),
-                                   ''.join(self.cityLineEdit.text()),
-                                   ''.join(self.regionLineEdit.text()),
-                                   ''.join(self.countryLineEdit.text()),
-                                   ''.join(self.zipLineEdit.text()),
-                                   ''.join(self.phoneNumberLineEdit.text())))
+            cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
+                            VALUES ({},{},{},{},{},{},{},{},{},{})
+                            """).format(self.studentTeacherIDLineEdit.text(),
+                                       self.firstNameLineEdit.text(),
+                                       self.lastNameLineEdit.text(),
+                                       self.genderNameLineEdit.text(),
+                                       self.addressLineEdit.text(),
+                                       self.cityLineEdit.text(),
+                                       self.regionLineEdit.text(),
+                                       self.countryLineEdit.text(),
+                                       self.zipLineEdit.text(),
+                                       self.phoneNumberLineEdit.text())
 
 
 

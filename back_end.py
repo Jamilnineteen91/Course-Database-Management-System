@@ -9,7 +9,7 @@ class newDatabase:
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="PASSWORD",
+				password="yafvr8udisspac3exec",
 			)
 
 			self.cursor = self.database.cursor()
@@ -73,9 +73,9 @@ class newDatabase:
 
 
 
-def main():
-	DB=newDatabase()
-	DB.ShowTables()
-
-if __name__ == '__main__':
-	main()
+# def main():
+# 	DB=newDatabase()
+# 	DB.ShowTables()
+#
+# if __name__ == '__main__':
+# 	main()
