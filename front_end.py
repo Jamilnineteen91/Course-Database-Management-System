@@ -7,10 +7,13 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from back_end import *
+import back_end
+
+
+
 
 class Ui_MainWindow(object):
-    db=newDatabase()
+    db = newDatabase()
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -237,8 +240,8 @@ class Ui_MainWindow(object):
 
     def add(self):
         if self.studentRadioButton.clicked():
-            cursor.execute('USE courseDB')
-            cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
+            db.cursor.execute('USE courseDB')
+            db.cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
                             VALUES ({},{},{},{},{},{},{},{},{},{})
                             """).format(self.studentTeacherIDLineEdit.text(),
                                        self.firstNameLineEdit.text(),
@@ -252,8 +255,8 @@ class Ui_MainWindow(object):
                                        self.phoneNumberLineEdit.text())
 
         elif self.teacherRadioButton.clicked():
-            cursor.execute('USE courseDB')
-            cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
+            db.cursor.execute('USE courseDB')
+            db.cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
                             VALUES ({},{},{},{},{},{},{},{},{},{})
                             """).format(self.studentTeacherIDLineEdit.text(),
                                        self.firstNameLineEdit.text(),
@@ -276,4 +279,3 @@ if __name__ == "__main__":
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
-

@@ -75,7 +75,9 @@ print("Imported back_end file!")
 
 # def main():
 # 	DB=newDatabase()
-# 	DB.ShowTables()
+#
 #
 # if __name__ == '__main__':
 # 	main()
+
+db=newDatabase()
