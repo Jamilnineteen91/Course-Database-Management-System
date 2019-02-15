@@ -7,9 +7,10 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import back_end
+from back_end import *
 
-
+db = newDatabase()
+db.Showtables()
 
 
 class Ui_MainWindow(object):
@@ -240,8 +241,8 @@ class Ui_MainWindow(object):
 
     def add(self):
         if self.studentRadioButton.clicked():
-            db.cursor.execute('USE courseDB')
-            db.cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
+            cursor.execute('USE courseDB')
+            cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
                             VALUES ({},{},{},{},{},{},{},{},{},{})
                             """).format(self.studentTeacherIDLineEdit.text(),
                                        self.firstNameLineEdit.text(),
@@ -255,8 +256,8 @@ class Ui_MainWindow(object):
                                        self.phoneNumberLineEdit.text())
 
         elif self.teacherRadioButton.clicked():
-            db.cursor.execute('USE courseDB')
-            db.cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
+            cursor.execute('USE courseDB')
+            cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
                             VALUES ({},{},{},{},{},{},{},{},{},{})
                             """).format(self.studentTeacherIDLineEdit.text(),
                                        self.firstNameLineEdit.text(),

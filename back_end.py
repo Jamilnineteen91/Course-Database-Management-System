@@ -73,11 +73,11 @@ class newDatabase:
 print("Imported back_end file!")
 
 
-# def main():
-# 	DB=newDatabase()
-#
-#
-# if __name__ == '__main__':
-# 	main()
+def main():
+	DB=newDatabase()
+	print(DB.cursor.execute("""SHOW TABLES"""))
 
-db=newDatabase()
+if __name__ == '__main__':
+	main()
+
+
