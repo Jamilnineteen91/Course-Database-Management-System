@@ -6,7 +6,7 @@ A client-user friendly database application.
 
 
 ## Database Schema (ERD)
-<img width="1101" alt="screen shot 2019-02-15 at 9 19 35 pm" src="https://user-images.githubusercontent.com/23427623/52893929-72dd2980-3167-11e9-9d20-9729242424d1.png">
+<img width="1104" alt="screen shot 2019-02-15 at 10 16 57 pm" src="https://user-images.githubusercontent.com/23427623/52894471-770d4500-316f-11e9-8e59-873b2e339476.png">
 
 
 ## Built With
