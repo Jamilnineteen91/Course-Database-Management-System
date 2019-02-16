@@ -10,7 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from back_end import *
 
 db = newDatabase()
-db.Showtables()
+
 
 
 class Ui_MainWindow(object):
@@ -254,6 +254,7 @@ class Ui_MainWindow(object):
                                        self.countryLineEdit.text(),
                                        self.zipLineEdit.text(),
                                        self.phoneNumberLineEdit.text())
+            cursor.commit()
 
         elif self.teacherRadioButton.clicked():
             cursor.execute('USE courseDB')
