@@ -35,7 +35,7 @@ class newDatabase:
 							phone_number INT(20) NOT NULL);""")
 
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS teacher(
-							teacher_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
+							teacher_id INT(7) UNSIGNED PRIMARY KEY,
 							first_name VARCHAR(30) NOT NULL,
 							last_name VARCHAR(30) NOT NULL,
 							gender ENUM('M','F','Other'),
@@ -50,7 +50,7 @@ class newDatabase:
 							course_name VARCHAR(20) NOT NULL,
 							description VARCHAR(60) NOT NULL,
 							course_id VARCHAR(7) NOT NULL PRIMARY KEY,
-							teacher_id INT(7) UNSIGNED NOT NULL,
+							teacher_id INT(7) UNSIGNED,
 							FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id));""")
 
 
@@ -95,6 +95,30 @@ class newDatabase:
 							VALUES (%s,%s,%s);""", (student_id,course_id,grade), )
 		self.save()
 
+	# <------------------------------------- Deletion functions ------------------------------------------------------->
+
+	def delete_student(self,id):
+		self.use()
+		self.cursor.execute("DELETE FROM enrollment WHERE student_id = %s;", (id,))
+		self.cursor.execute("DELETE FROM student WHERE student_id = %s;", (id,))
+		self.save()
+
+	def delete_teacher(self,id):
+		self.use()
+		self.cursor.execute("UPDATE course SET teacher_id = null WHERE teacher_id = %s;", (id,))
+		self.cursor.execute("DELETE FROM teacher WHERE teacher_id= %s;", (id,))
+		self.save()
+
+	def delete_course(self,id):
+		self.use()
+		self.cursor.execute("DELETE FROM enrollment WHERE course_id = %s;", (id,))
+		self.cursor.execute("DELETE FROM course WHERE course_id = %s;", (id,))
+		self.save()
+
+
+
+
+
 
 def main():
 	db=newDatabase()
@@ -102,7 +126,7 @@ def main():
 	# db.add_teacher(8644042,'elon','musk','M','360 wakopa st.','cape town','western cape','south africa','abc123',1234567890)
 	# db.add_course('physics','classical mechanics','phys101',8644042)
 	# db.enroll(7644042,'phys101','A+')
-
+	# db.delete_course('phys101')
 if __name__ == '__main__':
 	main()
 
