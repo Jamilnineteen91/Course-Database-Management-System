@@ -12,31 +12,16 @@ class newDatabase:
 				password="password",
 			)
 
-			self.cursor = self.database.cursor()
-			self.CreateDatabase()
-			self.CreateStudentTable()
-			self.CreateTeacherTable()
-			self.CreateCourseTable()
-			self.cursor.execute("USE courseDB")
-			self.tables=self.cursor.fetchall()
-			for i in range(len(self.tables)):
-				print(self.tables[i])
-
-
 		except mysql.connector.Error as e:
 			print(e)
 
+		self.cursor = self.database.cursor()
 
-	def CreateDatabase(self):
+		# Creates database
 		self.cursor.execute("CREATE DATABASE IF NOT EXISTS courseDB")
 
-	def ShowTables(self):
-		self.cursor.execute("SHOW TABLES")
-		for tables in self.cursor:
-			print(tables)
-
-	def CreateStudentTable(self):
-		self.cursor.execute("USE courseDB")
+		# Creates database tables
+		use = self.cursor.execute("USE courseDB")
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS student(
 							student_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
 							first_name VARCHAR(30) NOT NULL,
@@ -49,8 +34,6 @@ class newDatabase:
 							zip MEDIUMINT UNSIGNED NOT NULL,
 							phone_number VARCHAR(20) NOT NULL)""")
 
-	def CreateTeacherTable(self):
-		self.cursor.execute("USE courseDB")
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS teacher(
 							teacher_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
 							first_name VARCHAR(30) NOT NULL,
@@ -63,8 +46,6 @@ class newDatabase:
 							zip MEDIUMINT UNSIGNED NOT NULL,
 							phone_number VARCHAR(20) NOT NULL)""")
 
-	def CreateCourseTable(self):
-		self.cursor.execute("USE courseDB")
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS course(
 							course_name VARCHAR(20) NOT NULL,
 							description VARCHAR(60) NOT NULL,
@@ -72,7 +53,17 @@ class newDatabase:
 							teacher_id INT(7) UNSIGNED NOT NULL,
 							FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id))""")
 
+
+
+	def ShowTables(self):
+		self.cursor.execute("USE courseDB")
+		print(self.cursor.execute("SHOW TABLES"))
+
+
+
+
 	def add_student(self):
+		self.cursor.execute("USE courseDB")
 		self.cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
 							VALUES ({},{},{},{},{},{},{},{},{},{})""").format(self.studentTeacherIDLineEdit.text(),
                                        										  self.firstNameLineEdit.text(),
@@ -92,10 +83,7 @@ print("Imported back_end file!")
 
 def main():
 	db=newDatabase()
-	# db.cursor.execute("USE courseDB")
-	# tables=db.cursor.fetchall()
-	# for i in range(len(tables)):
-	# 	print(tables[i])
+	db.ShowTables()
 
 if __name__ == '__main__':
 	main()
