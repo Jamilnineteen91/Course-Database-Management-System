@@ -4,7 +4,7 @@ import mysql.connector
 class newDatabase:
 
 	def __init__(self):
-		# This try and except function ensures a connection to the db server
+		# Tests DB server connection
 		try:
 			self.database = mysql.connector.connect(
 				host="localhost",
@@ -21,7 +21,7 @@ class newDatabase:
 		self.cursor.execute("CREATE DATABASE IF NOT EXISTS courseDB;")
 
 		# Creates database tables
-		use = self.cursor.execute("USE courseDB")
+		self.cursor.execute("USE courseDB")
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS student(
 							student_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
 							first_name VARCHAR(30) NOT NULL,
@@ -62,31 +62,38 @@ class newDatabase:
     								FOREIGN KEY (student_id) REFERENCES student(student_id),
     								FOREIGN KEY (course_id) REFERENCES course(course_id));""")
 
+	# <------------------------------------------- Database Tools ----------------------------------------------------->
+	def use(self):
+		self.cursor.execute("USE courseDB;")
+
+	def save(self):
+		self.database.commit()
+
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->
 	def add_student(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
-		self.cursor.execute("USE courseDB;")
+		self.use()
 		self.cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
 							VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""", (id,first_name,last_name,gender,address,city,region,country,zip,phone_num),)
-		self.database.commit()
+		self.save()
 
 	def add_teacher(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
-		self.cursor.execute("USE courseDB;")
+		self.use()
 		self.cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
 							VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""", (id,first_name,last_name,gender,address,city,region,country,zip,phone_num),)
-		self.database.commit()
+		self.save()
 
 	def add_course(self, course_name, description, course_id, teacher_id):
-		self.cursor.execute("USE courseDB;")
+		self.use()
 		self.cursor.execute("""INSERT INTO course(course_name,description,course_id,teacher_id)
 							VALUES (%s,%s,%s,%s);""", (course_name, description, course_id, teacher_id), )
-		self.database.commit()
+		self.save()
 
 	def enroll(self,student_id,course_id,grade):
-		self.cursor.execute("USE courseDB;")
+		self.use()
 		self.cursor.execute("""INSERT INTO enrollment(student_id,course_id,grade)
 							VALUES (%s,%s,%s);""", (student_id,course_id,grade), )
-		self.database.commit()
+		self.save()
 
 
 def main():
