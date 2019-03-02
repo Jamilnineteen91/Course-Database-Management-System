@@ -69,6 +69,20 @@ class newDatabase:
 	def save(self):
 		self.database.commit()
 
+	def found(self,id,table):
+		self.use()
+		self.cursor.execute("SELECT * FROM {}".format(table))
+		theTable = self.cursor.fetchall()
+		found = None
+		if len(theTable)<0:
+			found=None
+		else:
+			for students in theTable:
+				if students[0] == id:
+					found = True
+		return found
+
+
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->
 	def add_student(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
@@ -141,45 +155,62 @@ class newDatabase:
 	# <------------------------------------- Deletion functions ------------------------------------------------------->
 
 	def delete_student(self,id):
-		try:
-			self.use()
-			self.cursor.execute("DELETE FROM enrollment WHERE student_id = %s;", (id,))
-			self.cursor.execute("DELETE FROM student WHERE student_id = %s;", (id,))
-			self.save()
-		except Exception as e:
-			print("Unable to delete {}\nError:{}".format(id,e))
+		Found=self.found(id,'student')
+		if Found==True:
+			try:
+				self.use()
+				self.cursor.execute("DELETE FROM enrollment WHERE student_id = %s;", (id,))
+				self.cursor.execute("DELETE FROM student WHERE student_id = %s;", (id,))
+				self.save()
+			except Exception as e:
+				print("Unable to delete student {}\nError:{}".format(id,e))
+		else:
+			print("Unable to delete student {}\nError: Student {} DNE".format(id,id))
 
 	def delete_teacher(self,id):
-		try:
-			self.use()
-			self.cursor.execute("UPDATE course SET teacher_id = null WHERE teacher_id = %s;", (id,))
-			self.cursor.execute("DELETE FROM teacher WHERE teacher_id= %s;", (id,))
-			self.save()
-		except Exception as e:
-			print("Unable to delete {}\nError:{}".format(id,e))
+		Found=self.found(id,'teacher')
+		if Found==True:
+			try:
+				self.use()
+				self.cursor.execute("UPDATE course SET teacher_id = null WHERE teacher_id = %s;", (id,))
+				self.cursor.execute("DELETE FROM teacher WHERE teacher_id= %s;", (id,))
+				self.save()
+			except Exception as e:
+				print("Unable to delete teacher {}\nError:{}".format(id,e))
+		else:
+			print("Unable to delete teacher {}\nError: Teacher {} DNE".format(id,id))
 
 	def delete_course(self,id):
-		try:
-			self.use()
-			self.cursor.execute("DELETE FROM enrollment WHERE course_id = %s;", (id,))
-			self.cursor.execute("DELETE FROM course WHERE course_id = %s;", (id,))
-			self.save()
-		except Exception as e:
-			print("Unable to delete {}\nError:{}".format(id,e))
+		Found=self.found(id,'course')
+		if Found==True:
+			try:
+				self.use()
+				self.cursor.execute("DELETE FROM enrollment WHERE course_id = %s;", (id,))
+				self.cursor.execute("DELETE FROM course WHERE course_id = %s;", (id,))
+				self.save()
+			except Exception as e:
+				print("Unable to delete course {}\nError:{}".format(id,e))
+		else:
+			print("Unable to delete course {}\nError: Course {} DNE".format(id,id))
 
 
 
 
 def main():
 	db=newDatabase()
-	#db.add_student(7644042,'jamil','mbabaali','M','183 eastcote dr.','winnipeg','manitoba','canada','r2n4h4',2049791641)
+	# db.add_student(7644042,'jamil','mbabaali','M','183 eastcote dr.','winnipeg','manitoba','canada','r2n4h4',2049791641)
 	# db.add_teacher(8644042,'elon','musk','M','360 wakopa st.','cape town','western cape','south africa','abc123',1234567890)
 	# db.add_course('physics','classical mechanics','phys101',8644042)
 	# db.enroll(7644042,'phys101','A+')
 	# db.delete_course('phys101')
-	#db.delete_student(764404288)
-	# db.add_student(1234567,'lebron','james','M','122 nash ave.','new york','new york','USA','t3e6y5')#1234567890)
-	# db.delete_student(1234567)
+	# db.delete_student(764404288)
+	# db.add_student(1234567,'lebron','james','M','122 nash ave.','new york','new york','USA','t3e6y5',1234567890)
+	db.delete_course(7644047)
+
+
+
+
+
 if __name__ == '__main__':
 	main()
 
