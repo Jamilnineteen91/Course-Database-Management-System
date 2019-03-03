@@ -22,3 +22,4 @@ A client-user friendly database application.
 - How to create a desktop application
 - Error handling
 - OOP (object oriented programing) 
+- Unit Testing (with [unittest] module)(https://docs.python.org/3/library/unittest.html)
