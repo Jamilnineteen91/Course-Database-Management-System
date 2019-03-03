@@ -1,6 +1,8 @@
 # Student-Database-Management-System
 A client-user friendly database application.
 
+### Status: incomplete
+
 ## Front-end Design
 <img width="1171" alt="ui_coursedb_design" src="https://user-images.githubusercontent.com/23427623/52012759-07296a00-24a1-11e9-9749-6a4517c8bd82.png">
 
