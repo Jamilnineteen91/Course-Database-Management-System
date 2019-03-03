@@ -47,9 +47,9 @@ class newDatabase:
 							phone_number INT(20) NOT NULL);""")
 
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS course(
+							course_id VARCHAR(7) NOT NULL PRIMARY KEY,
 							course_name VARCHAR(20) NOT NULL,
 							description VARCHAR(200) NOT NULL,
-							course_id VARCHAR(7) NOT NULL PRIMARY KEY,
 							teacher_id INT(7) UNSIGNED,
 							FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id));""")
 
@@ -77,8 +77,8 @@ class newDatabase:
 		if len(theTable)<0:
 			found=None
 		else:
-			for students in theTable:
-				if students[0] == id:
+			for data in theTable:
+				if data[0] == id:
 					found = True
 		return found
 
@@ -140,17 +140,21 @@ class newDatabase:
 			print("Unable to create new course {} with {}\nError: Course id must be 7 digits.".format(course_name, teacher_id))
 
 	def enroll(self,student_id,course_id,grade):
-		try:
-			self.use()
-			self.cursor.execute("""INSERT INTO enrollment(student_id,course_id,grade)
-								VALUES (%s,%s,%s);""", (student_id,course_id,grade), )
-			self.save()
+		Found=self.found(student_id,'enrollment')
+		if not Found:
+			try:
+				self.use()
+				self.cursor.execute("""INSERT INTO enrollment(student_id,course_id,grade)
+									VALUES (%s,%s,%s);""", (student_id,course_id,grade), )
+				self.save()
 
-		except TypeError:
-			print("Unable to enroll student {} in {}\nError: missing required field/s".format(student_id,course_id))
+			except TypeError:
+				print("Unable to enroll student {} in {}\nError: missing required field/s".format(student_id,course_id))
 
-		except Exception as e:
-			print("Unable to enroll student {} in {}\nError:{}".format(student_id,course_id,e))
+			except Exception as e:
+				print("Unable to enroll student {} in {}\nError:{}".format(student_id,course_id,e))
+		else:
+			print("Error: {} is already enrolled in {}".format(student_id,course_id))
 
 	# <------------------------------------- Deletion functions ------------------------------------------------------->
 
@@ -193,6 +197,58 @@ class newDatabase:
 		else:
 			print("Unable to delete course {}\nError: Course {} DNE".format(id,id))
 
+	#<---------------------------------------------- Search/Show functions ------------------------------------------>
+
+	def search_student(self,id):
+		Found=self.found(id,'student')
+		if Found==True:
+			try:
+				self.use()
+				self.cursor.execute("SELECT * FROM student WHERE student_id = %s;", (id,))
+				student=self.cursor.fetchall()
+				self.cursor.execute("SELECT * FROM enrollment WHERE student_id = %s ORDER BY course_id;", (id,))
+				course_load=self.cursor.fetchall()
+				print(student)
+				for classes in course_load:
+					print(classes)
+			except Exception as e:
+				print("Error:{}".format(e))
+		else:
+			print("Error: Student {} DNE".format(id))
+
+	def search_teacher(self,id):
+		Found=self.found(id,'teacher')
+		if Found==True:
+			try:
+				self.use()
+				self.cursor.execute("SELECT * FROM teacher WHERE teacher_id = %s;", (id,))
+				teacher=self.cursor.fetchall()
+				self.cursor.execute("SELECT * FROM course WHERE teacher_id = %s ORDER BY course_name;", (id,))
+				course_load=self.cursor.fetchall()
+				print(teacher)
+				for classes in course_load:
+					print(classes)
+			except Exception as e:
+				print("Error:{}".format(e))
+		else:
+			print("Error: Teacher {} DNE".format(id))
+
+	def search_course(self,id):
+		Found=self.found(id,'course')
+		if Found==True:
+			try:
+				self.use()
+				self.cursor.execute("SELECT * FROM course WHERE course_id = %s;",(id,))
+				course=self.cursor.fetchall()
+				self.cursor.execute("SELECT * FROM enrollment WHERE course_id = %s;",(id,))
+				classroom=self.cursor.fetchall()
+				print(course)
+				for students in classroom:
+					print(students)
+			except Exception as e:
+				print("Error:{}".format(e))
+		else:
+			print("Error: Course {} DNE".format(id))
 
 
 
@@ -200,13 +256,10 @@ def main():
 	db=newDatabase()
 	# db.add_student(7644042,'jamil','mbabaali','M','183 eastcote dr.','winnipeg','manitoba','canada','r2n4h4',2049791641)
 	# db.add_teacher(8644042,'elon','musk','M','360 wakopa st.','cape town','western cape','south africa','abc123',1234567890)
-	# db.add_course('physics','classical mechanics','phys101',8644042)
-	# db.enroll(7644042,'phys101','A+')
-	# db.delete_course('phys101')
-	# db.delete_student(764404288)
-	# db.add_student(1234567,'lebron','james','M','122 nash ave.','new york','new york','USA','t3e6y5',1234567890)
-	db.delete_course(7644047)
-
+	# db.add_course('Quantum physics','describes nature at the smallest scales of energy levels of atoms and subatomic particles','phys400',8644042)
+	# db.enroll(1234567,'phys400','A+')
+	# # db.add_student(1234567,'lebron','james','M','122 nash ave.','new york','new york','USA','t3e6y5',1234567890)
+	# db.search_student(1234567)
 
 
 
