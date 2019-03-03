@@ -56,11 +56,11 @@ class newDatabase:
 
 
 		self.cursor.execute("""CREATE TABLE IF NOT EXISTS enrollment(
-									student_id INT(7) UNSIGNED NOT NULL,
-    								course_id VARCHAR(7) NOT NULL,
-    								grade VARCHAR(2),
-    								FOREIGN KEY (student_id) REFERENCES student(student_id),
-    								FOREIGN KEY (course_id) REFERENCES course(course_id));""")
+							student_id INT(7) UNSIGNED NOT NULL,
+    						course_id VARCHAR(7) NOT NULL,
+    						grade VARCHAR(2),
+    						FOREIGN KEY (student_id) REFERENCES student(student_id),
+    						FOREIGN KEY (course_id) REFERENCES course(course_id));""")
 
 	# <------------------------------------------- Database Tools ----------------------------------------------------->
 	def use(self):
@@ -240,7 +240,7 @@ class newDatabase:
 				self.use()
 				self.cursor.execute("SELECT * FROM course WHERE course_id = %s;",(id,))
 				course=self.cursor.fetchall()
-				self.cursor.execute("SELECT * FROM enrollment WHERE course_id = %s;",(id,))
+				self.cursor.execute("SELECT * FROM enrollment WHERE course_id = %s ORDER BY student_id;",(id,))
 				classroom=self.cursor.fetchall()
 				print(course)
 				for students in classroom:
