@@ -258,7 +258,7 @@ def main():
 	# db.add_teacher(8644042,'elon','musk','M','360 wakopa st.','cape town','western cape','south africa','abc123',1234567890)
 	# db.add_course('Quantum physics','describes nature at the smallest scales of energy levels of atoms and subatomic particles','phys400',8644042)
 	# db.enroll(1234567,'phys400','A+')
-	# # db.add_student(1234567,'lebron','james','M','122 nash ave.','new york','new york','USA','t3e6y5',1234567890)
+	# db.add_student(1234567,'lebron','james','M','122 nash ave.','new york','new york','USA','t3e6y5',1234567890)
 	# db.search_student(1234567)
 
 
