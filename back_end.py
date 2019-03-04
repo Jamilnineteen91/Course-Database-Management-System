@@ -82,6 +82,23 @@ class newDatabase:
 					found = True
 		return found
 
+	# <---------------------------------- ---- Database Testing Tools ------------------------------------------------->
+	def student_check(self,id):
+		self.use()
+		self.cursor.execute("SELECT * FROM student WHERE student_id=%s",(id,))
+		student=self.cursor.fetchall()
+		print(student)
+
+	def teacher_check(self,id):
+		self.use()
+		print(self.cursor.execute("SELECT * FROM teacher WHERE teacher_id=%s",(id,)))
+
+	def course_check(self,id):
+		self.use()
+		print(self.cursor.execute("SELECT * FROM course WHERE course_id=%s",(id,)))
+
+
+
 
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->
@@ -249,19 +266,6 @@ class newDatabase:
 				print("Error:{}".format(e))
 		else:
 			print("Error: Course {} DNE".format(id))
-
-
-
-def main():
-	db=newDatabase()
-	# db.add_student(7644042,'jamil','mbabaali','M','183 eastcote dr.','winnipeg','manitoba','canada','r2n4h4',2049791641)
-	# db.add_teacher(8644042,'elon','musk','M','360 wakopa st.','cape town','western cape','south africa','abc123',1234567890)
-	# db.add_course('Quantum physics','describes nature at the smallest scales of energy levels of atoms and subatomic particles','phys400',8644042)
-	# db.enroll(1234567,'phys400','A+')
-	# db.add_student(1234567,'lebron','james','M','122 nash ave.','new york','new york','USA','t3e6y5',1234567890)
-	# db.search_student(1234567)
-
-
 
 
 if __name__ == '__main__':
