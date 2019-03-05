@@ -268,7 +268,6 @@ class newDatabase:
 			print("Error: Course {} DNE".format(id))
 
 
-if __name__ == '__main__':
-	main()
+
 
 
