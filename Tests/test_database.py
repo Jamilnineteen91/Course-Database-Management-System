@@ -33,7 +33,6 @@ class TestDatabase(unittest.TestCase):
         self.assertEqual(self.studentA,self.studentB)
 
     def test_add_teacher(self):
-        self.db
         self.db.add_teacher(8644042,'elon','musk','M','360 wakopa st.','cape town','western cape','south africa','abc123',1234567890)
         self.db.cursor.execute("SELECT * FROM teacher WHERE teacher_id=8644042")
         self.teacherA = self.db.cursor.fetchall()
@@ -79,6 +78,47 @@ class TestDatabase(unittest.TestCase):
         print(self.B)
 
         self.assertEqual(self.A, self.B)
+
+    def test_delete_student(self):
+        self.db.add_student(7644042, 'jamil', 'mbabaali', 'M', '183 eastcote dr.', 'winnipeg', 'manitoba', 'canada',
+                            'r2n4h4', 2049791641)
+        self.db.delete_student(7644042)
+
+        self.db.use()
+        self.db.cursor.execute("SELECT * FROM student;")
+        self.student = self.db.cursor.fetchall()
+        print(self.student)
+
+        self.empty=[]
+
+        self.assertEqual(self.student,self.empty)
+
+    def test_delete_teacher(self):
+        self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa','abc123', 1234567890)
+        self.db.delete_teacher(8644042)
+
+        self.db.use()
+        self.db.cursor.execute("SELECT * FROM teacher;")
+        self.teacher = self.db.cursor.fetchall()
+        print(self.teacher)
+
+        self.empty=[]
+
+        self.assertEqual(self.teacher,self.empty)
+
+    def test_delete_course(self):
+        self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa','abc123', 1234567890)
+        self.db.add_course('Quantum physics','describes nature at the smallest scales of energy levels of atoms and subatomic particles','phys400', 8644042)
+        self.db.delete_course('phys400')
+
+        self.db.use()
+        self.db.cursor.execute("SELECT * FROM course;")
+        self.course = self.db.cursor.fetchall()
+        print(self.course)
+
+        self.empty = []
+
+        self.assertEqual(self.course, self.empty)
 
 
 
