@@ -13,10 +13,12 @@ class TestDatabase(unittest.TestCase):
         self.db.cursor.execute("DROP DATABASE IF EXISTS courseDB;")
         print('tearDown\n')
 
+#<----------------------------------------------- Init Test ----------------------------------------------------------->
 
     def test_newDatabase(self):
         self.assertIsInstance(self.db,newDatabase)
 
+#<----------------------------------------------- Add f(x) Tests ------------------------------------------------------>
     def test_add_student(self):
 
         self.db.add_student(7644042,'jamil','mbabaali','M','183 eastcote dr.','winnipeg','manitoba','canada','r2n4h4',2049791641)
@@ -29,8 +31,8 @@ class TestDatabase(unittest.TestCase):
         self.studentB=self.db.cursor.fetchall()
         print(self.studentB)
 
-
         self.assertEqual(self.studentA,self.studentB)
+        print('Add student')
 
     def test_add_teacher(self):
         self.db.add_teacher(8644042,'elon','musk','M','360 wakopa st.','cape town','western cape','south africa','abc123',1234567890)
@@ -44,6 +46,7 @@ class TestDatabase(unittest.TestCase):
         print(self.teacherB)
 
         self.assertEqual(self.teacherA, self.teacherB)
+        print('Add teacher')
 
     def test_add_course(self):
         self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa','abc123', 1234567890)
@@ -58,6 +61,7 @@ class TestDatabase(unittest.TestCase):
         print(self.courseB)
 
         self.assertEqual(self.courseA, self.courseB)
+        print('Add course')
 
     def test_enroll(self):
         self.db
@@ -71,13 +75,15 @@ class TestDatabase(unittest.TestCase):
         self.A = self.db.cursor.fetchall()
         print(self.A)
 
-
         self.db.use()
         self.db.cursor.execute("SELECT * FROM enrollment WHERE student_id=1234567;")
         self.B = self.db.cursor.fetchall()
         print(self.B)
 
         self.assertEqual(self.A, self.B)
+        print('Enroll')
+
+    # <----------------------------------------------- Delete f(x) Tests ---------------------------------------------->
 
     def test_delete_student(self):
         self.db.add_student(7644042, 'jamil', 'mbabaali', 'M', '183 eastcote dr.', 'winnipeg', 'manitoba', 'canada',
@@ -92,6 +98,7 @@ class TestDatabase(unittest.TestCase):
         self.empty=[]
 
         self.assertEqual(self.student,self.empty)
+        print('Delete student')
 
     def test_delete_teacher(self):
         self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa','abc123', 1234567890)
@@ -105,6 +112,7 @@ class TestDatabase(unittest.TestCase):
         self.empty=[]
 
         self.assertEqual(self.teacher,self.empty)
+        print('Delete teacher')
 
     def test_delete_course(self):
         self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa','abc123', 1234567890)
@@ -119,10 +127,54 @@ class TestDatabase(unittest.TestCase):
         self.empty = []
 
         self.assertEqual(self.course, self.empty)
+        print('Delete course')
+
+#<----------------------------------------------- Search f(x) Tests ------------------------------------------------------>
+
+    def test_search_student(self):
+        self.db.add_student(7644042, 'jamil', 'mbabaali', 'M', '183 eastcote dr.', 'winnipeg', 'manitoba', 'canada',
+                            'r2n4h4', 2049791641)
+        self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa',
+                            'abc123', 1234567890)
+        self.db.add_course('Quantum physics',
+                           'describes nature at the smallest scales of energy levels of atoms and subatomic particles',
+                           'phys400', 8644042)
+        self.db.enroll(7644042, 'phys400', 'A+')
+
+
+        self.db.search_student(7644042)
+        print('Search course')
+
+    def test_search_teacher(self):
+        self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa',
+                            'abc123', 1234567890)
+        self.db.add_course('Quantum physics',
+                           'describes nature at the smallest scales of energy levels of atoms and subatomic particles',
+                           'phys400', 8644042)
+        self.db.add_course('Classical mechanics',
+                           'the study of the motion of bodies in accordance with the general principles first enunciated by Sir Isaac Newton',
+                           'phys100', 8644042)
+
+        self.db.search_teacher(8644042)
+        print('Search course')
+
+    def test_search_course(self):
+        self.db.add_student(1234567, 'lebron', 'james', 'M', '122 nash ave.', 'new york', 'new york', 'USA', 't3e6y5',
+                            1234567890)
+        self.db.add_student(7644042, 'jamil', 'mbabaali', 'M', '183 eastcote dr.', 'winnipeg', 'manitoba', 'canada',
+                            'r2n4h4', 2049791641)
+        self.db.add_teacher(8644042, 'elon', 'musk', 'M', '360 wakopa st.', 'cape town', 'western cape', 'south africa',
+                            'abc123', 1234567890)
+        self.db.add_course('Quantum physics',
+                           'describes nature at the smallest scales of energy levels of atoms and subatomic particles',
+                           'phys400', 8644042)
+        self.db.enroll(7644042, 'phys400', 'A+')
+        self.db.enroll(1234567, 'phys400', 'A+')
+
+        self.db.search_course('phys400')
+        print('Search course')
 
 
 
 if __name__ == '__main__':
     unittest.main()
-
-
