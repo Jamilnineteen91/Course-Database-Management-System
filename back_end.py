@@ -73,32 +73,27 @@ class newDatabase:
 		self.use()
 		self.cursor.execute("SELECT * FROM {}".format(table))
 		theTable = self.cursor.fetchall()
-		found = None
+		found = False
 		if len(theTable)<0:
-			found=None
+			found=False
 		else:
 			for data in theTable:
 				if data[0] == id:
 					found = True
 		return found
 
-	# <---------------------------------- ---- Database Testing Tools ------------------------------------------------->
-	def student_check(self,id):
+	def found_enrollment(self,student_id,course_id):
 		self.use()
-		self.cursor.execute("SELECT * FROM student WHERE student_id=%s",(id,))
-		student=self.cursor.fetchall()
-		print(student)
-
-	def teacher_check(self,id):
-		self.use()
-		print(self.cursor.execute("SELECT * FROM teacher WHERE teacher_id=%s",(id,)))
-
-	def course_check(self,id):
-		self.use()
-		print(self.cursor.execute("SELECT * FROM course WHERE course_id=%s",(id,)))
-
-
-
+		self.cursor.execute("SELECT * FROM enrollment")
+		theTable = self.cursor.fetchall()
+		found = False
+		if len(theTable)<0:
+			found=False
+		else:
+			for data in theTable:
+				if data[0] == student_id and data[1] == course_id:
+					found = True
+		return found
 
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->
@@ -267,6 +262,61 @@ class newDatabase:
 		else:
 			print("Error: Course {} DNE".format(id))
 
+# <---------------------------------------------- Up-date functions ------------------------------------------>
+
+	def update_student(self,id,col,val):
+		Found = self.found(id, 'student')
+		if Found:
+			try:
+				self.use()
+				self.cursor.execute("""UPDATE student SET %s = %s WHERE student_id = %s""",
+									(col, val, id),)
+				self.save()
+			except Exception as e:
+				print("Error:{}".format(e))
+		else:
+			print("Unable to update student {}\nError: Student {} DNE".format(id,id))
+
+	def update_teacher(self,id,col,val):
+		Found = self.found(id, 'teacher')
+		if Found:
+			try:
+				self.use()
+				self.cursor.execute("""UPDATE teacher SET %s = %s WHERE teacher_id = %s""",
+									(col, val, id),)
+				self.save()
+			except Exception as e:
+				print("Error:{}".format(e))
+		else:
+			print("Unable to update teacher {}\nError: Teacher {} DNE".format(id,id))
+
+
+	def update_course(self,id,col,val):
+		Found = self.found(id, 'course')
+		if Found:
+			try:
+				self.use()
+				self.cursor.execute("""UPDATE course SET %s = %s WHERE course_id = %s""",
+									(col, val, id),)
+				self.save()
+			except Exception as e:
+				print("Error:{}".format(e))
+		else:
+			print("Unable to update course {}\nError: Course {} DNE".format(id,id))
+
+	def update_enrollment(self,student_id,course_id,val):
+		Found = self.found_enrollment(student_id, course_id)
+		if Found:
+			try:
+				self.use()
+				self.cursor.execute("""UPDATE enrollment SET grade = %s WHERE student_id = %s 
+									AND course_id = %s""", (val, student_id, course_id),)
+				self.save()
+			except Exception as e:
+				print("Error:{}".format(e))
+		else:
+			print("""Unable to update enrollment\nError: Unable to identify 
+					student {} in course {}""".format(student_id,course_id))
 
 
 
