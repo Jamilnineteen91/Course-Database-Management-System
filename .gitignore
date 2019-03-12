@@ -1,2 +1,5 @@
+# Ignore __pycache__ folder that is created
+__pycache__
+
 # Ignore all pic files
 *.pyc
