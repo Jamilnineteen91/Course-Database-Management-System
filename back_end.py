@@ -1,4 +1,3 @@
-
 import mysql.connector
 
 class newDatabase:
@@ -133,13 +132,13 @@ class newDatabase:
 		else:
 			print("Unable to create new student\nError: Student id must be 7 digits.")
 
-	def add_course(self, course_name, description, course_id, teacher_id):
+	def add_course(self,course_id, course_name, description, teacher_id):
 		ID=course_id
 		if len(ID) == 7:
 			try:
 				self.use()
-				self.cursor.execute("""INSERT INTO course(course_name,description,course_id,teacher_id)
-									VALUES (%s,%s,%s,%s);""", (course_name, description, ID, teacher_id), )
+				self.cursor.execute("""INSERT INTO course(course_id,course_name,description,teacher_id)
+									VALUES (%s,%s,%s,%s);""", ( ID,course_name, description, teacher_id), )
 				self.save()
 
 			except TypeError:
@@ -269,8 +268,8 @@ class newDatabase:
 		if Found:
 			try:
 				self.use()
-				self.cursor.execute("""UPDATE student SET %s = %s WHERE student_id = %s""",
-									(col, val, id),)
+				# Format method is needed to add column names into database
+				self.cursor.execute("""UPDATE student SET {} = %s WHERE student_id = %s;""".format(col),(val,id),)
 				self.save()
 			except Exception as e:
 				print("Error:{}".format(e))
@@ -282,8 +281,8 @@ class newDatabase:
 		if Found:
 			try:
 				self.use()
-				self.cursor.execute("""UPDATE teacher SET %s = %s WHERE teacher_id = %s""",
-									(col, val, id),)
+				# Format method is needed to add column names into database
+				self.cursor.execute("""UPDATE teacher SET {} = %s WHERE teacher_id = %s;""".format(col), (val, id), )
 				self.save()
 			except Exception as e:
 				print("Error:{}".format(e))
@@ -296,28 +295,26 @@ class newDatabase:
 		if Found:
 			try:
 				self.use()
-				self.cursor.execute("""UPDATE course SET %s = %s WHERE course_id = %s""",
-									(col, val, id),)
+				# Format method is needed to add column names into database
+				self.cursor.execute("""UPDATE course SET {} = %s WHERE course_id = '%s';""".format(col), (val,id), )
 				self.save()
 			except Exception as e:
 				print("Error:{}".format(e))
 		else:
 			print("Unable to update course {}\nError: Course {} DNE".format(id,id))
 
-	def update_enrollment(self,student_id,course_id,val):
+	def update_enrollment(self,student_id,course_id,val,col='grade'):
 		Found = self.found_enrollment(student_id, course_id)
 		if Found:
 			try:
 				self.use()
-				self.cursor.execute("""UPDATE enrollment SET grade = %s WHERE student_id = %s 
-									AND course_id = %s""", (val, student_id, course_id),)
+				# Format method is needed to add column names into database
+				self.cursor.execute("""UPDATE enrollment SET {} = %s WHERE student_id = %s 
+									AND course_id = %s""".format(col), (val, student_id, course_id),)
 				self.save()
 			except Exception as e:
 				print("Error:{}".format(e))
 		else:
 			print("""Unable to update enrollment\nError: Unable to identify 
 					student {} in course {}""".format(student_id,course_id))
-
-
-
 
