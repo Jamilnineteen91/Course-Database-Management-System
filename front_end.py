@@ -9,9 +9,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from back_end import *
 
-db = newDatabase()
-
-
 
 class Ui_MainWindow(object):
     db = newDatabase()
@@ -238,38 +235,6 @@ class Ui_MainWindow(object):
         self.updateButton.setText(_translate("MainWindow", "Update"))
         self.searchButton.setText(_translate("MainWindow", "Search"))
         self.deleteButton.setText(_translate("MainWindow", "Delete"))
-
-    def add(self):
-        if self.studentRadioButton.clicked():
-            cursor.execute('USE courseDB')
-            cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
-                            VALUES ({},{},{},{},{},{},{},{},{},{})
-                            """).format(self.studentTeacherIDLineEdit.text(),
-                                       self.firstNameLineEdit.text(),
-                                       self.lastNameLineEdit.text(),
-                                       self.genderNameLineEdit.text(),
-                                       self.addressLineEdit.text(),
-                                       self.cityLineEdit.text(),
-                                       self.regionLineEdit.text(),
-                                       self.countryLineEdit.text(),
-                                       self.zipLineEdit.text(),
-                                       self.phoneNumberLineEdit.text())
-            cursor.commit()
-
-        elif self.teacherRadioButton.clicked():
-            cursor.execute('USE courseDB')
-            cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
-                            VALUES ({},{},{},{},{},{},{},{},{},{})
-                            """).format(self.studentTeacherIDLineEdit.text(),
-                                       self.firstNameLineEdit.text(),
-                                       self.lastNameLineEdit.text(),
-                                       self.genderNameLineEdit.text(),
-                                       self.addressLineEdit.text(),
-                                       self.cityLineEdit.text(),
-                                       self.regionLineEdit.text(),
-                                       self.countryLineEdit.text(),
-                                       self.zipLineEdit.text(),
-                                       self.phoneNumberLineEdit.text())
 
 
 
