@@ -8,7 +8,7 @@ class newDatabase:
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="password",
+				password="PASSWORD",
 			)
 
 		except mysql.connector.Error as e:
@@ -296,7 +296,7 @@ class newDatabase:
 			try:
 				self.use()
 				# Format method is needed to add column names into database
-				self.cursor.execute("""UPDATE course SET {} = %s WHERE course_id = '%s';""".format(col), (val,id), )
+				self.cursor.execute("""UPDATE course SET {} = %s WHERE course_id = %s;""".format(col), (val,id), )
 				self.save()
 			except Exception as e:
 				print("Error:{}".format(e))
