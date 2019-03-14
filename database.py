@@ -8,7 +8,7 @@ class newDatabase:
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="PASSWORD",
+				password="password",
 			)
 
 		except mysql.connector.Error as e:
@@ -68,7 +68,8 @@ class newDatabase:
 	def save(self):
 		self.database.commit()
 
-	def found(self,id,table):
+
+	def found(self,id,table):# This function aids with error correcting within numerous fuctions.
 		self.use()
 		self.cursor.execute("SELECT * FROM {}".format(table))
 		theTable = self.cursor.fetchall()
@@ -81,7 +82,8 @@ class newDatabase:
 					found = True
 		return found
 
-	def found_enrollment(self,student_id,course_id):
+	def found_enrollment(self,student_id,course_id):# This function aids with error correcting within the update_
+													# enrollment function.
 		self.use()
 		self.cursor.execute("SELECT * FROM enrollment")
 		theTable = self.cursor.fetchall()
@@ -130,7 +132,7 @@ class newDatabase:
 				print("Unable to create new teacher\nError:{}".format(e))
 
 		else:
-			print("Unable to create new student\nError: Student id must be 7 digits.")
+			print("Unable to create new teacher\nError: Student id must be 7 digits.")
 
 	def add_course(self,course_id, course_name, description, teacher_id):
 		ID=course_id
@@ -148,7 +150,7 @@ class newDatabase:
 				print("Unable to create new course {} with {}\nError:{}".format(course_name,teacher_id,e))
 
 		else:
-			print("Unable to create new course {} with {}\nError: Course id must be 7 digits.".format(course_name, teacher_id))
+			print("Unable to create new course {} with {}\nError: Course id must be 7 characters long.".format(course_name, teacher_id))
 
 	def enroll(self,student_id,course_id,grade):
 		Found=self.found(student_id,'enrollment')
