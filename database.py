@@ -103,12 +103,11 @@ class newDatabase:
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->
 	def add_student(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
-		ID = id
-		if 999999 < ID <= 9999999:
+		if 999999 < id <= 9999999:
 			try:
 				self.use()
 				self.cursor.execute("""INSERT INTO student(student_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
-										VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""", (ID,first_name,last_name,gender,address,city,region,country,zip,phone_num),)
+										VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""", (id,first_name,last_name,gender,address,city,region,country,zip,phone_num),)
 				self.save()
 
 			except TypeError:
@@ -122,12 +121,11 @@ class newDatabase:
 
 
 	def add_teacher(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
-		ID = id
-		if 999999 < ID <= 9999999:
+		if 999999 < id <= 9999999:
 			try:
 				self.use()
 				self.cursor.execute("""INSERT INTO teacher(teacher_id, first_name, last_name, gender, address, city, region, country, zip, phone_number)
-										VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""", (ID,first_name,last_name,gender,address,city,region,country,zip,phone_num),)
+										VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""", (id,first_name,last_name,gender,address,city,region,country,zip,phone_num),)
 				self.save()
 
 			except TypeError:
@@ -137,15 +135,15 @@ class newDatabase:
 				print("Unable to create new teacher\nError:{}".format(e))
 
 		else:
-			print("Unable to create new teacher\nError: Student id must be 7 digits.")
+			print("Unable to create new teacher\nError: teacher id must be 7 digits.")
 
 	def add_course(self,course_id, course_name, description, teacher_id):
-		ID=course_id
-		if len(ID) == 7:
+		Found=self.found(teacher_id,'teacher')
+		if len(course_id) == 7 and Found:
 			try:
 				self.use()
 				self.cursor.execute("""INSERT INTO course(course_id,course_name,description,teacher_id)
-									VALUES (%s,%s,%s,%s);""", ( ID,course_name, description, teacher_id), )
+									VALUES (%s,%s,%s,%s);""", ( course_id,course_name, description, teacher_id), )
 				self.save()
 
 			except TypeError:
@@ -155,7 +153,7 @@ class newDatabase:
 				print("Unable to create new course {} with {}\nError:{}".format(course_name,teacher_id,e))
 
 		else:
-			print("Unable to create new course {} with {}\nError: Course id must be 7 characters long.".format(course_name, teacher_id))
+			print("Unable to create new course {} with {}\nHint: Ensure course id is 7 characters long and/or teacher id is correct.".format(course_name, teacher_id))
 
 	def enroll(self,student_id,course_id,grade):
 		Found=self.found(student_id,'enrollment')
@@ -178,7 +176,7 @@ class newDatabase:
 
 	def delete_student(self,id):
 		Found=self.found(id,'student')
-		if Found==True:
+		if Found:
 			try:
 				self.use()
 				self.cursor.execute("DELETE FROM enrollment WHERE student_id = %s;", (id,))
@@ -191,7 +189,7 @@ class newDatabase:
 
 	def delete_teacher(self,id):
 		Found=self.found(id,'teacher')
-		if Found==True:
+		if Found:
 			try:
 				self.use()
 				self.cursor.execute("UPDATE course SET teacher_id = null WHERE teacher_id = %s;", (id,))
@@ -204,7 +202,7 @@ class newDatabase:
 
 	def delete_course(self,id):
 		Found=self.found(id,'course')
-		if Found==True:
+		if Found:
 			try:
 				self.use()
 				self.cursor.execute("DELETE FROM enrollment WHERE course_id = %s;", (id,))
@@ -219,7 +217,7 @@ class newDatabase:
 
 	def search_student(self,id):
 		Found=self.found(id,'student')
-		if Found==True:
+		if Found:
 			try:
 				self.use()
 				self.cursor.execute("SELECT * FROM student WHERE student_id = %s;", (id,))
@@ -236,7 +234,7 @@ class newDatabase:
 
 	def search_teacher(self,id):
 		Found=self.found(id,'teacher')
-		if Found==True:
+		if Found:
 			try:
 				self.use()
 				self.cursor.execute("SELECT * FROM teacher WHERE teacher_id = %s;", (id,))
@@ -253,7 +251,7 @@ class newDatabase:
 
 	def search_course(self,id):
 		Found=self.found(id,'course')
-		if Found==True:
+		if Found:
 			try:
 				self.use()
 				self.cursor.execute("SELECT * FROM course WHERE course_id = %s;",(id,))
@@ -323,4 +321,3 @@ class newDatabase:
 				print("Error:{}".format(e))
 		else:
 			print("""Unable to update enrollment\nError: Unable to identify student {} in course {}""".format(student_id,course_id))
-
