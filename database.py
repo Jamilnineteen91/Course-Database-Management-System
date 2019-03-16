@@ -317,6 +317,5 @@ class newDatabase:
 			except Exception as e:
 				print("Error:{}".format(e))
 		else:
-			print("""Unable to update enrollment\nError: Unable to identify 
-					student {} in course {}""".format(student_id,course_id))
+			print("""Unable to update enrollment\nError: Unable to identify student {} in course {}""".format(student_id,course_id))
 
