@@ -1,8 +1,8 @@
 import sys
-sys.path.append('../')
+sys.path.append('../../')
 import unittest
 from unittest.mock import patch
-from back_end import newDatabase
+from database import newDatabase
 
 class TestDatabase(unittest.TestCase):
 
