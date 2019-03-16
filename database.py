@@ -1,5 +1,6 @@
 import mysql.connector
 
+
 class newDatabase:
 
 	def __init__(self):
@@ -11,55 +12,56 @@ class newDatabase:
 				password="password",
 			)
 
+			self.cursor = self.database.cursor()
+
+			# Creates database
+			self.cursor.execute("CREATE DATABASE IF NOT EXISTS courseDB;")
+
+			# Creates database tables
+			self.cursor.execute("USE courseDB")
+			self.cursor.execute("""CREATE TABLE IF NOT EXISTS student(
+											student_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
+											first_name VARCHAR(30) NOT NULL,
+											last_name VARCHAR(30) NOT NULL,
+											gender ENUM('M','F','Other'),
+											address VARCHAR(50) NOT NULL,
+											city VARCHAR(40) NOT NULL,
+											region VARCHAR(30) NOT NULL,
+											country VARCHAR(30) NOT NULL,
+											zip VARCHAR(6) NOT NULL,
+											phone_number INT(20) NOT NULL);""")
+
+			self.cursor.execute("""CREATE TABLE IF NOT EXISTS teacher(
+											teacher_id INT(7) UNSIGNED PRIMARY KEY,
+											first_name VARCHAR(30) NOT NULL,
+											last_name VARCHAR(30) NOT NULL,
+											gender ENUM('M','F','Other'),
+											address VARCHAR(50) NOT NULL,
+											city VARCHAR(40) NOT NULL,
+											region VARCHAR(30) NOT NULL,
+											country VARCHAR(30) NOT NULL,
+											zip VARCHAR(6) NOT NULL,
+											phone_number INT(20) NOT NULL);""")
+
+			self.cursor.execute("""CREATE TABLE IF NOT EXISTS course(
+											course_id VARCHAR(7) NOT NULL PRIMARY KEY,
+											course_name VARCHAR(20) NOT NULL,
+											description VARCHAR(200) NOT NULL,
+											teacher_id INT(7) UNSIGNED,
+											FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id));""")
+
+			self.cursor.execute("""CREATE TABLE IF NOT EXISTS enrollment(
+											student_id INT(7) UNSIGNED NOT NULL,
+											course_id VARCHAR(7) NOT NULL,
+											grade VARCHAR(2),
+											FOREIGN KEY (student_id) REFERENCES student(student_id),
+											FOREIGN KEY (course_id) REFERENCES course(course_id));""")
+
 		except mysql.connector.Error as e:
 			print("Database server connection failed\nError:{}".format(e))
 
-		self.cursor = self.database.cursor()
-
-		# Creates database
-		self.cursor.execute("CREATE DATABASE IF NOT EXISTS courseDB;")
-
-		# Creates database tables
-		self.cursor.execute("USE courseDB")
-		self.cursor.execute("""CREATE TABLE IF NOT EXISTS student(
-							student_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
-							first_name VARCHAR(30) NOT NULL,
-							last_name VARCHAR(30) NOT NULL,
-							gender ENUM('M','F','Other'),
-							address VARCHAR(50) NOT NULL,
-							city VARCHAR(40) NOT NULL,
-							region VARCHAR(30) NOT NULL,
-							country VARCHAR(30) NOT NULL,
-							zip VARCHAR(6) NOT NULL,
-							phone_number INT(20) NOT NULL);""")
-
-		self.cursor.execute("""CREATE TABLE IF NOT EXISTS teacher(
-							teacher_id INT(7) UNSIGNED PRIMARY KEY,
-							first_name VARCHAR(30) NOT NULL,
-							last_name VARCHAR(30) NOT NULL,
-							gender ENUM('M','F','Other'),
-							address VARCHAR(50) NOT NULL,
-							city VARCHAR(40) NOT NULL,
-							region VARCHAR(30) NOT NULL,
-							country VARCHAR(30) NOT NULL,
-							zip VARCHAR(6) NOT NULL,
-							phone_number INT(20) NOT NULL);""")
-
-		self.cursor.execute("""CREATE TABLE IF NOT EXISTS course(
-							course_id VARCHAR(7) NOT NULL PRIMARY KEY,
-							course_name VARCHAR(20) NOT NULL,
-							description VARCHAR(200) NOT NULL,
-							teacher_id INT(7) UNSIGNED,
-							FOREIGN KEY (teacher_id) REFERENCES teacher(teacher_id));""")
-
-
-
-		self.cursor.execute("""CREATE TABLE IF NOT EXISTS enrollment(
-							student_id INT(7) UNSIGNED NOT NULL,
-    						course_id VARCHAR(7) NOT NULL,
-    						grade VARCHAR(2),
-    						FOREIGN KEY (student_id) REFERENCES student(student_id),
-    						FOREIGN KEY (course_id) REFERENCES course(course_id));""")
+		except Exception as e:
+			print("Unable to initialize database.\nError:{}".format(e))
 
 	# <------------------------------------------- Database Tools ----------------------------------------------------->
 	def use(self):
