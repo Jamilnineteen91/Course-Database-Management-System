@@ -119,11 +119,7 @@ class newDatabase:
 
 		else:
 			print("Unable to create new student\nError: Student id must be 7 digits.")
-<<<<<<< HEAD
-=======
 
-
->>>>>>> e08bdd7... minor edit
 
 	def add_teacher(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
 		ID = id
