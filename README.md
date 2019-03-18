@@ -12,10 +12,11 @@ A client-user friendly database application.
 
 
 ## Built With
-- PyQt5 (python GUI library)
-- MySQL (backend database)
-- Qt Designer (designed front-end)
+- [PyQt5](https://pypi.org/project/PyQt5/) (python GUI library)
+- [MySQL](https://www.mysql.com/) (backend database)
+- [Qt Designer](https://doc.qt.io/qt-5/qtdesigner-manual.html) (designed front-end)
 - [Visual Paradigm](https://online.visual-paradigm.com/) (designed the ERB)
+- [Unit Test](https://docs.python.org/3/library/unittest.html) (testing)
 
 ## What I learned
 
