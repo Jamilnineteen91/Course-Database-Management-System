@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>766</width>
+    <height>489</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QListView" name="listView"/>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0" alignment="Qt::AlignHCenter">
+           <widget class="QLabel" name="stdnt_teacher_title_label">
+            <property name="text">
+             <string>Student/Teacher</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <layout class="QFormLayout" name="formLayout">
+            <property name="labelAlignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <item row="1" column="0">
+             <widget class="QRadioButton" name="stdnt_radioButton">
+              <property name="text">
+               <string>Student</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QRadioButton" name="tchr_radioButton">
+              <property name="text">
+               <string>Teacher</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="first_name_label">
+              <property name="layoutDirection">
+               <enum>Qt::LeftToRight</enum>
+              </property>
+              <property name="text">
+               <string>First name</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLineEdit" name="first_name_lineEdit"/>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="last_name_label">
+              <property name="text">
+               <string>Last name</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="last_name_lineEdit"/>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="gender_label">
+              <property name="text">
+               <string>Gender</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="address_label">
+              <property name="text">
+               <string>Address</string>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLineEdit" name="address_lineEdit"/>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="city_label">
+              <property name="text">
+               <string>City</string>
+              </property>
+             </widget>
+            </item>
+            <item row="7" column="1">
+             <widget class="QLineEdit" name="city_lineEdit"/>
+            </item>
+            <item row="8" column="0">
+             <widget class="QLabel" name="region_label">
+              <property name="text">
+               <string>Region</string>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLineEdit" name="region_lineEdit"/>
+            </item>
+            <item row="9" column="0">
+             <widget class="QLabel" name="country_label">
+              <property name="text">
+               <string>Country</string>
+              </property>
+             </widget>
+            </item>
+            <item row="9" column="1">
+             <widget class="QLineEdit" name="country_lineEdit"/>
+            </item>
+            <item row="10" column="0">
+             <widget class="QLabel" name="zip_label">
+              <property name="text">
+               <string>Zip</string>
+              </property>
+             </widget>
+            </item>
+            <item row="10" column="1">
+             <widget class="QLineEdit" name="zip_lineEdit"/>
+            </item>
+            <item row="11" column="0">
+             <widget class="QLabel" name="telephone_label">
+              <property name="text">
+               <string>Telephone number</string>
+              </property>
+             </widget>
+            </item>
+            <item row="11" column="1">
+             <widget class="QLineEdit" name="telephone_lineEdit"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="stdnt_tchr_ID_label">
+              <property name="text">
+               <string>Student/Teacher ID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="stdnt_tchr_ID_lineEdit"/>
+            </item>
+            <item row="5" column="1">
+             <widget class="QComboBox" name="comboBox">
+              <item>
+               <property name="text">
+                <string>Male</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Female</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Other</string>
+               </property>
+              </item>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QLabel" name="course_title_label">
+            <property name="text">
+             <string>Course</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QRadioButton" name="crs_radioButton">
+            <property name="text">
+             <string>Course</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QFormLayout" name="formLayout_2">
+            <property name="labelAlignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <item row="1" column="0">
+             <widget class="QLabel" name="course_id_label">
+              <property name="text">
+               <string>Course ID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="course_id_lineEdit"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="crs_name_label">
+              <property name="text">
+               <string>Course name</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="crs_name_lineEdit"/>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="desc_label">
+              <property name="text">
+               <string>Description</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="crs_teacherID_label">
+              <property name="text">
+               <string>Teacher ID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLineEdit" name="crs_teacherID_lineEdit"/>
+            </item>
+            <item row="3" column="1">
+             <widget class="QTextEdit" name="description_textEdit"/>
+            </item>
+           </layout>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QLabel" name="enroll_title_label">
+            <property name="text">
+             <string>Enrollment</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignHCenter">
+           <widget class="QRadioButton" name="enroll_radioButton">
+            <property name="text">
+             <string>Enrollment</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QFormLayout" name="formLayout_3">
+            <property name="labelAlignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+            </property>
+            <item row="0" column="0">
+             <widget class="QLabel" name="enroll_stdntID_label">
+              <property name="text">
+               <string>Student ID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="enroll_crsID_label">
+              <property name="text">
+               <string>Course ID</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="enroll_stdntID_lineEdit"/>
+            </item>
+            <item row="1" column="1">
+             <widget class="QLineEdit" name="enroll_crsID_lineEdit"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="enroll_grade_label">
+              <property name="text">
+               <string>Grade</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="enroll_grade_lineEdit"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="add_pushButton">
+          <property name="text">
+           <string>Add</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="update_pushButton">
+          <property name="text">
+           <string>Update</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="search_pushButton">
+          <property name="text">
+           <string>Search</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="delete_pushButton">
+          <property name="text">
+           <string>Delete</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>766</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
