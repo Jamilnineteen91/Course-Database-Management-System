@@ -1,4 +1,4 @@
-# Student-Database-Management-System
+# Student Database Management System
 A client-user friendly database application.
 
 ### Status: incomplete
