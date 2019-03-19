@@ -4,7 +4,7 @@ A client-user friendly database application.
 ### Status: incomplete
 
 ## Front-end Design
-<img width="1171" alt="ui_coursedb_design" src="https://user-images.githubusercontent.com/23427623/52012759-07296a00-24a1-11e9-9749-6a4517c8bd82.png">
+<img width="798" alt="Screen Shot 2019-03-19 at 5 00 19 PM" src="https://user-images.githubusercontent.com/23427623/54644977-bc6fab80-4a68-11e9-9f86-31ed24a026b7.png">
 
 
 ## Database Schema (ERD)
