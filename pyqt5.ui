@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>919</width>
-    <height>489</height>
+    <height>464</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -235,7 +235,7 @@
              <widget class="QLineEdit" name="crs_teacherID_lineEdit"/>
             </item>
             <item row="3" column="1">
-             <widget class="QLineEdit" name="lineEdit"/>
+             <widget class="QLineEdit" name="crs_desc_lineEdit"/>
             </item>
            </layout>
           </item>
