@@ -25,7 +25,7 @@ class newDatabase:
 											student_id INT(7) UNSIGNED NOT NULL PRIMARY KEY,
 											first_name VARCHAR(30) NOT NULL,
 											last_name VARCHAR(30) NOT NULL,
-											gender ENUM('M','F','Other'),
+											gender ENUM('Male','Female','Other'),
 											address VARCHAR(50) NOT NULL,
 											city VARCHAR(40) NOT NULL,
 											region VARCHAR(30) NOT NULL,
