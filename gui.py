@@ -6,7 +6,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets, QPushButton
+from PyQt5 import QtCore, QtGui, QtWidgets
 from database import newDatabase
 
 class Ui_MainWindow(object):
@@ -176,7 +176,7 @@ class Ui_MainWindow(object):
         self.add_pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.add_pushButton.setObjectName("add_pushButton")
         self.horizontalLayout_2.addWidget(self.add_pushButton)
-        self.add_pushButton.clicked().connect(self.add_button())
+
         self.update_pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.update_pushButton.setObjectName("update_pushButton")
         self.horizontalLayout_2.addWidget(self.update_pushButton)
@@ -290,7 +290,19 @@ class Ui_MainWindow(object):
             self.enroll_info=self.self.enroll_vals()
             self.db.enroll(self.enroll_info[0],self.enroll_info[1],self.enroll_info[2])
 
+        self.add_pushButton.clicked().connect(self.add_button())
 
+    def delete_button(self):
+        if self.stdnt_radioButton.isChecked() == True:
+            self.db.delete_student(int(self.stdnt_tchr_ID_lineEdit.text()))
+
+        elif self.tchr_radioButton.isChecked() == True:
+            self.db.delete_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))
+
+        elif self.crs_radioButton.isChecked() == True:
+            self.db.delete_course(str(self.course_id_lineEdit.text()))
+
+        self.delete_pushButton.clicked().connect(self.delete_button())
 
 if __name__ == "__main__":
     import sys
