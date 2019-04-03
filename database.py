@@ -11,7 +11,7 @@ class newDatabase:
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="password",
+				password="yafvr8udisspac3exec",
 			)
 
 			self.cursor = self.database.cursor()
