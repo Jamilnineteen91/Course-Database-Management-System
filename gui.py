@@ -282,31 +282,39 @@ class Ui_MainWindow(object):
             self.stdnt_info=self.persons_vals()
             self.db.add_student(self.stdnt_info[0],self.stdnt_info[1],self.stdnt_info[2],self.stdnt_info[3],
             self.stdnt_info[4],self.stdnt_info[5],self.stdnt_info[6],self.stdnt_info[7],self.stdnt_info[8],self.stdnt_info[9])
+            self.clear(self.persons_vals())
 
         elif self.tchr_radioButton.isChecked()==True and self.empty_vals(self.persons_vals())==False:
             self.tchr_info=self.persons_vals()
             self.db.add_teacher(self.tchr_info[0],self.tchr_info[1],self.tchr_info[2],self.tchr_info[3],
             self.tchr_info[4],self.tchr_info[5],self.tchr_info[6],self.tchr_info[7],self.tchr_info[8],self.tchr_info[9])
+            self.clear(self.persons_vals())
 
         elif self.crs_radioButton.isChecked()==True and self.empty_vals(self.course_vals())==False:
             self.crs_info=self.course_vals()
             self.db.add_course(self.crs_info[0],self.crs_info[1],self.crs_info[2],self.crs_info[3])
+            self.clear(self.course_vals())
 
         elif self.enroll_radioButton.isChecked()==True and self.empty_vals(self.enroll_vals())==False:
             self.enroll_info=self.self.enroll_vals()
             self.db.enroll(self.enroll_info[0],self.enroll_info[1],self.enroll_info[2])
+            self.clear(self.enroll_vals())
 
         self.add_pushButton.clicked().connect(self.add_button())
+
 
     def delete_button(self):
         if self.stdnt_radioButton.isChecked() == True:
             self.db.delete_student(int(self.stdnt_tchr_ID_lineEdit.text()))
+            self.clear(self.persons_vals())
 
         elif self.tchr_radioButton.isChecked() == True:
             self.db.delete_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))
+            self.clear(self.persons_vals())
 
         elif self.crs_radioButton.isChecked() == True:
             self.db.delete_course(str(self.course_id_lineEdit.text()))
+            self.clear(self.course_vals())
 
         self.delete_pushButton.clicked().connect(self.delete_button())
 
