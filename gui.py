@@ -271,6 +271,12 @@ class Ui_MainWindow(object):
             else:
                 return True
 
+    def clear(self,fcn):
+        alist=fcn
+        for val in alist:
+            val=""
+
+
     def add_button(self):
         if self.stdnt_radioButton.isChecked()==True and self.empty_vals(self.persons_vals())==False:
             self.stdnt_info=self.persons_vals()
@@ -284,7 +290,7 @@ class Ui_MainWindow(object):
 
         elif self.crs_radioButton.isChecked()==True and self.empty_vals(self.course_vals())==False:
             self.crs_info=self.course_vals()
-            self.db.add_course(crs_info[0],crs_info[1],crs_info[2],crs_info[3])
+            self.db.add_course(self.crs_info[0],self.crs_info[1],self.crs_info[2],self.crs_info[3])
 
         elif self.enroll_radioButton.isChecked()==True and self.empty_vals(self.enroll_vals())==False:
             self.enroll_info=self.self.enroll_vals()
