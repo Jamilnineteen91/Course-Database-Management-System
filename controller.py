@@ -1,4 +1,4 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from .gui import Ui_MainWindow
 from .database import newDatabase
 
@@ -49,11 +49,8 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 return True
 
     def clear(self,fcn):
-        alist=fcn
-        i=0
-        while i<len(alist):
-            alist[i]=""
-            i+=1
+        pass
+
 
     # <------------------------------------------ Add functions ---------------------------------------------------->
     def add_button(self):
