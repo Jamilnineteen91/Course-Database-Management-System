@@ -26,3 +26,4 @@ A client-user friendly database application.
 - Error handling
 - OOP (object oriented programing) 
 - Unit Testing (with the [unittest](https://docs.python.org/3/library/unittest.html) module)
+- Software Architecture
