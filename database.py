@@ -58,10 +58,12 @@ class newDatabase():
 											FOREIGN KEY (course_id) REFERENCES course(course_id));""")
 
 		except mysql.connector.Error as e:
-			print("Database server connection failed\nError:{}".format(e))
+			message="Database server connection failed\nError:{}".format(e)
+			self.displayMessageBox(message)
 
 		except Exception as e:
-			print("Unable to initialize database.\nError:{}".format(e))
+			message="Unable to initialize database.\nError:{}".format(e)
+			self.displayMessageBox(message)
 
 	# <------------------------------------------- Database Tools ----------------------------------------------------->
 	def use(self):
