@@ -1,9 +1,8 @@
 import mysql.connector
-import PyQt5
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 
-class newDatabase:
+class newDatabase():
 
 	def __init__(self):
 		# Tests DB server connection
@@ -15,7 +14,6 @@ class newDatabase:
 			)
 
 			self.cursor = self.database.cursor()
-
 			# Creates database
 			self.cursor.execute("CREATE DATABASE IF NOT EXISTS courseDB;")
 
@@ -100,6 +98,14 @@ class newDatabase:
 					found = True
 		return found
 
+	def displayMessageBox(self, message):
+		msgBox = QtGui.QmessageBox()
+		msgBox.setIcon(QtGui.QmessageBox.Warning)
+		msgBox.setWindowTitle(title)
+		msgBox.setText(message)
+		msgBox.setStandardButtons(QtGui.QmessageBox.Ok)
+		msgBox.exec_()
+
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->
 	def add_student(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
@@ -110,15 +116,15 @@ class newDatabase:
 										VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s);""", (id,first_name,last_name,gender,address,city,region,country,zip,phone_num),)
 				self.save()
 
-			except TypeError:
-				print("Unable to create new student\nError: Missing required field/s")
-
+			except TypeError as T:
+				self.msgBox.setText("Unable to create new student\nError: Missing required field/s\n{}".format(T))
+				self.msgBox.exec_()
 			except Exception as e:
-				print("Unable to create new student\nError:{}".format(e))
-
+				self.msgBox.setText("Unable to create new student\nError:{}".format(e))
+				self.msgBox.exec_()
 		else:
-			print("Unable to create new student\nError: Student id must be 7 digits.")
-
+			self.msgBox.setText("Unable to create new student\nError: Student id must be 7 digits.")
+			self.msgBox.exec_()
 
 	def add_teacher(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
 		if 999999 < id <= 9999999:
@@ -129,13 +135,16 @@ class newDatabase:
 				self.save()
 
 			except TypeError:
-				print("Unable to create new teacher\nError: missing required field/s")
+				message="Unable to create new teacher\nError: missing required field/s"
+				self.displayMessageBox(message)
 
 			except Exception as e:
-				print("Unable to create new teacher\nError:{}".format(e))
+				message="Unable to create new teacher\nError:{}".format(e)
+				self.displayMessageBox(message)
 
 		else:
-			print("Unable to create new teacher\nError: teacher id must be 7 digits.")
+			message="Unable to create new teacher\nError: teacher id must be 7 digits."
+			self.displayMessageBox(message)
 
 	def add_course(self,course_id, course_name, description, teacher_id):
 		Found=self.found(teacher_id,'teacher')
