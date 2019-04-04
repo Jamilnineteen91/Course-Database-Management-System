@@ -70,7 +70,6 @@ class newDatabase():
 	def save(self):
 		self.database.commit()
 
-
 	def found(self,id,table):# This function aids with error correcting within numerous fuctions.
 		self.use()
 		self.cursor.execute("SELECT * FROM {}".format(table))
@@ -105,7 +104,6 @@ class newDatabase():
 		msgBox.setText(message)
 		msgBox.setStandardButtons(QtGui.QmessageBox.Ok)
 		msgBox.exec_()
-
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->
 	def add_student(self,id,first_name,last_name,gender,address,city,region,country,zip,phone_num):
