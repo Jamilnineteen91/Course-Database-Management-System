@@ -8,7 +8,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
         super(controller, self).__init__()
 
         # User interface setup from the designer.
-        self.setupUI(self)
+        self.setupUi(self)
 
         # Button connections.
         self.add_pushButton.clicked.connect(self.add_button)
@@ -58,24 +58,24 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
 
     # <------------------------------------------ Add functions ---------------------------------------------------->
     def add_button(self):
-        if self.stdnt_radioButton.isChecked()==True and self.empty_vals(self.persons_vals())==False:
+        if self.stdnt_radioButton.isChecked()==True:
             self.stdnt_info=self.persons_vals()
             self.db.add_student(self.stdnt_info[0],self.stdnt_info[1],self.stdnt_info[2],self.stdnt_info[3],
             self.stdnt_info[4],self.stdnt_info[5],self.stdnt_info[6],self.stdnt_info[7],self.stdnt_info[8],self.stdnt_info[9])
             self.clear(self.persons_vals())
 
-        elif self.tchr_radioButton.isChecked()==True and self.empty_vals(self.persons_vals())==False:
+        elif self.tchr_radioButton.isChecked()==True:
             self.tchr_info=self.persons_vals()
             self.db.add_teacher(self.tchr_info[0],self.tchr_info[1],self.tchr_info[2],self.tchr_info[3],
             self.tchr_info[4],self.tchr_info[5],self.tchr_info[6],self.tchr_info[7],self.tchr_info[8],self.tchr_info[9])
             self.clear(self.persons_vals())
 
-        elif self.crs_radioButton.isChecked()==True and self.empty_vals(self.course_vals())==False:
+        elif self.crs_radioButton.isChecked()==True:
             self.crs_info=self.course_vals()
             self.db.add_course(self.crs_info[0],self.crs_info[1],self.crs_info[2],self.crs_info[3])
             self.clear(self.course_vals())
 
-        elif self.enroll_radioButton.isChecked()==True and self.empty_vals(self.enroll_vals())==False:
+        elif self.enroll_radioButton.isChecked()==True:
             self.enroll_info=self.self.enroll_vals()
             self.db.enroll(self.enroll_info[0],self.enroll_info[1],self.enroll_info[2])
             self.clear(self.enroll_vals())
@@ -102,8 +102,6 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
+    controller=controller()
+    controller.show()
     sys.exit(app.exec_())
