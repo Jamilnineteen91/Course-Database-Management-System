@@ -10,7 +10,7 @@ class newDatabase():
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="alienworkshop",
+				password="yafvr8udisspac3exec",
 			)
 
 			self.cursor = self.database.cursor()
@@ -102,7 +102,7 @@ class newDatabase():
 	def displayMessageBox(self, message):
 		msgBox = QtGui.QmessageBox()
 		msgBox.setIcon(QtGui.QmessageBox.Warning)
-		msgBox.setWindowTitle(title)
+		msgBox.setWindowTitle('Error')
 		msgBox.setText(message)
 		msgBox.setStandardButtons(QtGui.QmessageBox.Ok)
 		msgBox.exec_()
