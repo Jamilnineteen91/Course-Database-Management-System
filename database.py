@@ -1,5 +1,5 @@
 import mysql.connector
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtGui
 
 
 class newDatabase():
