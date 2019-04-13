@@ -156,13 +156,16 @@ class newDatabase():
 				self.save()
 
 			except TypeError:
-				print("Unable to create new course {} with {}\nError: missing required field/s".format(course_name,teacher_id))
+				message="Unable to create new course {} with {}\nError: missing required field/s".format(course_name,teacher_id)
+				self.displayMessageBox(message)
 
 			except Exception as e:
-				print("Unable to create new course {} with {}\nError:{}".format(course_name,teacher_id,e))
+				message="Unable to create new course {} with {}\nError:{}".format(course_name,teacher_id,e)
+				self.displayMessageBox(message)
 
 		else:
-			print("Unable to create new course {} with {}\nHint: Ensure course id is 7 characters long and/or teacher id is correct.".format(course_name, teacher_id))
+			message="Unable to create new course {} with {}\nHint: Ensure course id is 7 characters long and/or teacher id is correct.".format(course_name, teacher_id)
+			self.displayMessageBox(message)
 
 	def enroll(self,student_id,course_id,grade):
 		Found=self.found(student_id,'enrollment')
@@ -174,12 +177,15 @@ class newDatabase():
 				self.save()
 
 			except TypeError:
-				print("Unable to enroll student {} in {}\nError: missing required field/s".format(student_id,course_id))
+				message="Unable to enroll student {} in {}\nError: missing required field/s".format(student_id,course_id)
+				self.displayMessageBox(message)
 
 			except Exception as e:
-				print("Unable to enroll student {} in {}\nError:{}".format(student_id,course_id,e))
+				message="Unable to enroll student {} in {}\nError:{}".format(student_id,course_id,e)
+				self.displayMessageBox(message)
 		else:
-			print("Error: {} is already enrolled in {}".format(student_id,course_id))
+			message="Error: {} is already enrolled in {}".format(student_id,course_id)
+			self.displayMessageBox(message)
 
 	# <------------------------------------- Deletion functions ------------------------------------------------------->
 
@@ -192,9 +198,11 @@ class newDatabase():
 				self.cursor.execute("DELETE FROM student WHERE student_id = %s;", (id,))
 				self.save()
 			except Exception as e:
-				print("Unable to delete student {}\nError:{}".format(id,e))
+				message="Unable to delete student {}\nError:{}".format(id,e)
+				self.displayMessageBox(message)
 		else:
-			print("Unable to delete student {}\nError: Student {} DNE".format(id,id))
+			message="Unable to delete student {}\nError: Student {} DNE".format(id,id)
+			self.displayMessageBox(message)
 
 	def delete_teacher(self,id):
 		Found=self.found(id,'teacher')
@@ -205,9 +213,11 @@ class newDatabase():
 				self.cursor.execute("DELETE FROM teacher WHERE teacher_id= %s;", (id,))
 				self.save()
 			except Exception as e:
-				print("Unable to delete teacher {}\nError:{}".format(id,e))
+				message="Unable to delete teacher {}\nError:{}".format(id,e)
+				self.displayMessageBox(message)
 		else:
-			print("Unable to delete teacher {}\nError: Teacher {} DNE".format(id,id))
+			message="Unable to delete teacher {}\nError: Teacher {} DNE".format(id,id)
+			self.displayMessageBox(message)
 
 	def delete_course(self,id):
 		Found=self.found(id,'course')
@@ -218,9 +228,11 @@ class newDatabase():
 				self.cursor.execute("DELETE FROM course WHERE course_id = %s;", (id,))
 				self.save()
 			except Exception as e:
-				print("Unable to delete course {}\nError:{}".format(id,e))
+				message="Unable to delete course {}\nError:{}".format(id,e)
+				self.displayMessageBox(message)
 		else:
-			print("Unable to delete course {}\nError: Course {} DNE".format(id,id))
+			message="Unable to delete course {}\nError: Course {} DNE".format(id,id)
+			self.displayMessageBox(message)
 
 	#<---------------------------------------------- Search/Show functions ------------------------------------------>
 
@@ -237,9 +249,11 @@ class newDatabase():
 				for classes in course_load:
 					print(classes)
 			except Exception as e:
-				print("Error:{}".format(e))
+				message="Error:{}".format(e)
+				self.displayMessageBox(message)
 		else:
-			print("Error: Student {} DNE".format(id))
+			message="Error: Student {} DNE".format(id)
+			self.displayMessageBox(message)
 
 	def search_teacher(self,id):
 		Found=self.found(id,'teacher')
@@ -254,9 +268,11 @@ class newDatabase():
 				for classes in course_load:
 					print(classes)
 			except Exception as e:
-				print("Error:{}".format(e))
+				message="Error:{}".format(e)
+				self.displayMessageBox(message)
 		else:
-			print("Error: Teacher {} DNE".format(id))
+			message="Error: Teacher {} DNE".format(id)
+			self.displayMessageBox(message)
 
 	def search_course(self,id):
 		Found=self.found(id,'course')
@@ -271,9 +287,11 @@ class newDatabase():
 				for students in classroom:
 					print(students)
 			except Exception as e:
-				print("Error:{}".format(e))
+				message="Error:{}".format(e)
+				self.displayMessageBox(message)
 		else:
-			print("Error: Course {} DNE".format(id))
+			message="Error: Course {} DNE".format(id)
+			self.displayMessageBox(message)
 
 # <---------------------------------------------- Up-date functions ------------------------------------------>
 
@@ -286,9 +304,11 @@ class newDatabase():
 				self.cursor.execute("""UPDATE student SET {} = %s WHERE student_id = %s;""".format(col),(val,id),)
 				self.save()
 			except Exception as e:
-				print("Error:{}".format(e))
+				message="Error:{}".format(e)
+				self.displayMessageBox(message)
 		else:
-			print("Unable to update student {}\nError: Student {} DNE".format(id,id))
+			message="Unable to update student {}\nError: Student {} DNE".format(id,id)
+			self.displayMessageBox(message)
 
 	def update_teacher(self,id,col,val):
 		Found = self.found(id, 'teacher')
@@ -299,9 +319,11 @@ class newDatabase():
 				self.cursor.execute("""UPDATE teacher SET {} = %s WHERE teacher_id = %s;""".format(col), (val, id), )
 				self.save()
 			except Exception as e:
-				print("Error:{}".format(e))
+				message="Error:{}".format(e)
+				self.displayMessageBox(message)
 		else:
-			print("Unable to update teacher {}\nError: Teacher {} DNE".format(id,id))
+			message="Unable to update teacher {}\nError: Teacher {} DNE".format(id,id)
+			self.displayMessageBox(message)
 
 
 	def update_course(self,id,col,val):
@@ -313,9 +335,11 @@ class newDatabase():
 				self.cursor.execute("""UPDATE course SET {} = %s WHERE course_id = %s;""".format(col), (val,id), )
 				self.save()
 			except Exception as e:
-				print("Error:{}".format(e))
+				message="Error:{}".format(e)
+				self.displayMessageBox(message)
 		else:
-			print("Unable to update course {}\nError: Course {} DNE".format(id,id))
+			message="Unable to update course {}\nError: Course {} DNE".format(id,id)
+			self.displayMessageBox(message)
 
 	def update_enrollment(self,student_id,course_id,val,col='grade'):
 		Found = self.found_enrollment(student_id, course_id)
@@ -327,6 +351,7 @@ class newDatabase():
 									AND course_id = %s""".format(col), (val, student_id, course_id),)
 				self.save()
 			except Exception as e:
-				print("Error:{}".format(e))
+				message="Error:{}".format(e)
 		else:
-			print("""Unable to update enrollment\nError: Unable to identify student {} in course {}""".format(student_id,course_id))
+			message="""Unable to update enrollment\nError: Unable to identify student {} in course {}""".format(student_id,course_id)
+			self.displayMessageBox(message)
