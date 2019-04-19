@@ -1,5 +1,5 @@
 import mysql.connector
-from PyQt5 import QtGui
+from PyQt5 import QtWidgets
 
 
 class newDatabase():
@@ -10,7 +10,7 @@ class newDatabase():
 			self.database = mysql.connector.connect(
 				host="localhost",
 				user="root",
-				password="password",
+				password="alienworkshop",
 			)
 
 			self.cursor = self.database.cursor()
@@ -100,11 +100,11 @@ class newDatabase():
 		return found
 
 	def displayMessageBox(self, message):
-		msgBox = QtGui.QmessageBox()
-		msgBox.setIcon(QtGui.QmessageBox.Warning)
+		msgBox = QtWidgets.QmessageBox()
+		msgBox.setIcon(QtWidgets.QmessageBox.Warning)
 		msgBox.setWindowTitle('Error')
 		msgBox.setText(message)
-		msgBox.setStandardButtons(QtGui.QmessageBox.Ok)
+		msgBox.setStandardButtons(QtWidgets.QmessageBox.Ok)
 		msgBox.exec_()
 
 	# <-------------------------------------- Add/Inserting functions ------------------------------------------------->

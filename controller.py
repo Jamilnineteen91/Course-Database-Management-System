@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
-from .gui import Ui_MainWindow
-from .database import newDatabase
+from gui import Ui_MainWindow
+from database import newDatabase
 
 class controller(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
