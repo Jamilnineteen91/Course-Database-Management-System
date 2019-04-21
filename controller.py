@@ -48,8 +48,25 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             else:
                 return True
 
-    def clear(self,fcn):
-        pass
+    def clear(self):
+        self.stdnt_tchr_ID_lineEdit.clear()
+        self.first_name_lineEdit.clear()
+        self.last_name_lineEdit.clear()
+        self.address_lineEdit.clear()
+        self.city_lineEdit.clear()
+        self.region_lineEdit.clear()
+        self.country_lineEdit.clear()
+        self.zip_lineEdit.clear()
+        self.telephone_lineEdit.clear()
+
+        self.course_id_lineEdit.clear()
+        self.crs_name_lineEdit.clear()
+        self.crs_desc_lineEdit.clear()
+        self.crs_teacherID_lineEdit.clear()
+
+        self.enroll_stdntID_lineEdit.clear()
+        self.enroll_crsID_lineEdit.clear()
+        self.enroll_grade_lineEdit.clear()
 
 
     # <------------------------------------------ Add functions ---------------------------------------------------->
@@ -57,38 +74,38 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
         if self.stdnt_radioButton.isChecked()==True:
             self.stdnt_info=self.persons_vals()
             self.db.add_student(self.stdnt_info[0],self.stdnt_info[1],self.stdnt_info[2],self.stdnt_info[3],self.stdnt_info[4],self.stdnt_info[5],self.stdnt_info[6],self.stdnt_info[7],self.stdnt_info[8],self.stdnt_info[9])
-            self.clear(self.persons_vals())
+            self.clear()
 
         elif self.tchr_radioButton.isChecked()==True:
             self.tchr_info=self.persons_vals()
             self.db.add_teacher(self.tchr_info[0],self.tchr_info[1],self.tchr_info[2],self.tchr_info[3],self.tchr_info[4],self.tchr_info[5],self.tchr_info[6],self.tchr_info[7],self.tchr_info[8],self.tchr_info[9])
-            self.clear(self.persons_vals())
+            self.clear()
 
         elif self.crs_radioButton.isChecked()==True:
             self.crs_info=self.course_vals()
             self.db.add_course(self.crs_info[0],self.crs_info[1],self.crs_info[2],self.crs_info[3])
-            self.clear(self.course_vals())
+            self.clear()
 
         elif self.enroll_radioButton.isChecked()==True:
             self.enroll_info=self.self.enroll_vals()
             self.db.enroll(self.enroll_info[0],self.enroll_info[1],self.enroll_info[2])
-            self.clear(self.enroll_vals())
+            self.clear()
         print('Worked!')
 
     # <------------------------------------- Deletion functions ------------------------------------------------------->
     def delete_button(self):
         if self.stdnt_radioButton.isChecked() == True:
             self.db.delete_student(int(self.stdnt_tchr_ID_lineEdit.text()))
-            self.clear(self.persons_vals())
+            self.clear()
             print('worked!')
 
         elif self.tchr_radioButton.isChecked() == True:
             self.db.delete_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))
-            self.clear(self.persons_vals())
+            self.clear()
 
         elif self.crs_radioButton.isChecked() == True:
             self.db.delete_course(str(self.course_id_lineEdit.text()))
-            self.clear(self.course_vals())
+            self.clear()
 
 
 
