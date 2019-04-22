@@ -243,10 +243,11 @@ class newDatabase():
 				self.cursor.execute("SELECT * FROM student WHERE student_id = %s;", (id,))
 				student=self.cursor.fetchall()
 				self.cursor.execute("SELECT * FROM enrollment WHERE student_id = %s ORDER BY course_id;", (id,))
-				course_load=self.cursor.fetchall()
-				print(student)
-				for classes in course_load:
-					print(classes)
+				courses=self.cursor.fetchall()
+				course_load=[]
+				for classes in courses:
+					course_load.append(classes)
+				return student, course_load
 			except Exception as e:
 				message="Error:{}".format(e)
 				self.displayMessageBox(message)
@@ -262,10 +263,11 @@ class newDatabase():
 				self.cursor.execute("SELECT * FROM teacher WHERE teacher_id = %s;", (id,))
 				teacher=self.cursor.fetchall()
 				self.cursor.execute("SELECT * FROM course WHERE teacher_id = %s ORDER BY course_name;", (id,))
-				course_load=self.cursor.fetchall()
-				print(teacher)
-				for classes in course_load:
-					print(classes)
+				courses=self.cursor.fetchall()
+				course_load=[]
+				for classes in courses:
+					course_load.append(classes)
+				return teacher, course_load
 			except Exception as e:
 				message="Error:{}".format(e)
 				self.displayMessageBox(message)
@@ -282,9 +284,10 @@ class newDatabase():
 				course=self.cursor.fetchall()
 				self.cursor.execute("SELECT * FROM enrollment WHERE course_id = %s ORDER BY student_id;",(id,))
 				classroom=self.cursor.fetchall()
-				print(course)
+				enrolled=[]
 				for students in classroom:
-					print(students)
+					enrolled.append(students)
+				return course, enrolled
 			except Exception as e:
 				message="Error:{}".format(e)
 				self.displayMessageBox(message)
