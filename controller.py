@@ -113,10 +113,10 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
     # <---------------------------------- Search/Look-up functions ---------------------------------------------------->
 
     def search_button(self):
-        self.listView.clear()
+        self.listView.clearSelection()
         if self.stdnt_radioButton.isChecked():
-            self.input_vals=self.persons_vals()
-            self.stdnt_data=self.db.search_student(self.line_edit_vals[0])
+            self.input_vals=self.stdnt_tchr_ID_lineEdit.text()
+            self.stdnt_data=self.db.search_student(self.input_vals[0])
             self.listView.addItems(self.stdnt_data[0])
             self.listView.addItems(self.stdnt_data[1])
 
