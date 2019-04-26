@@ -354,6 +354,7 @@ class newDatabase():
 				self.save()
 			except Exception as e:
 				message="Error:{}".format(e)
+				self.displayMessageBox(message)
 		else:
 			message="""Unable to update enrollment\nError: Unable to identify student {} in course {}""".format(student_id,course_id)
 			self.displayMessageBox(message)

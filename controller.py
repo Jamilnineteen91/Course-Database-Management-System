@@ -14,6 +14,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
         self.add_pushButton.clicked.connect(self.add_button)
         self.add_pushButton.clicked.connect(self.clear)
         self.delete_pushButton.clicked.connect(self.delete_button)
+        self.search_pushButton.clicked.connect(self.search_button)
 
 
     # <------------------------------------------- GUI Tools ------------------------------------------------------>
@@ -109,8 +110,29 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.db.delete_course(str(self.course_id_lineEdit.text()))
             self.clear()
 
+    # <---------------------------------- Search/Look-up functions ---------------------------------------------------->
 
+    def search_button(self):
+        self.listView.clear()
+        if self.stdnt_radioButton.isChecked():
+            self.input_vals=self.persons_vals()
+            self.stdnt_data=self.db.search_student(self.line_edit_vals[0])
+            self.listView.addItems(self.stdnt_data[0])
+            self.listView.addItems(self.stdnt_data[1])
 
+        elif self.tchr_radioButton.isChecked():
+            self.input_vals=self.persons_vals()
+            self.tchr_data = self.db.search_teacher(self.input_vals[0])
+            self.listView.addItems(self.tchr_data[0])
+            self.listView.addItems(self.tchr_data[1])
+
+        elif self.crs_radioButton.isChecked():
+            self.input_vals=self.course_vals()
+            self.course_data=self.db.search_course(self.input_vals[0])
+            self.listView.addItems(self.course_data[0])
+            self.listView.addItems(self.course_data[1])
+
+        self.listView.show()
 
 
 if __name__ == "__main__":
