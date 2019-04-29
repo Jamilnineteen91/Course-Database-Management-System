@@ -120,18 +120,22 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.tableWidget.clear()
 
             # Retrieve data
-            self.input_vals=int(self.stdnt_tchr_ID_lineEdit.text())
-            self.stdnt_data=self.db.search_student(self.input_vals) # Returns 2 lists, [0] is desired data
+            self.stdnt_data=self.db.search_student(int(self.stdnt_tchr_ID_lineEdit.text())) # Returns 2 lists, [0] is desired data
 
             # Set up tableWidget rows and columns
             self.tableWidget.setColumnCount(len(self.stdnt_data[0][0]))
             self.tableWidget.insertRow(0)
 
             # Display data
-            self.i=0
+            self.column=0
             for data in self.stdnt_data[0][0]:
-                self.tableWidget.setItem(0, self.i, QtWidgets.QTableWidgetItem(str(data)))
-                self.i+=1
+                self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
+                self.column+=1
+
+            self.row=0
+            for course in self.stdnt_data[1][0]:
+                self.tableWidget.setItem(self.row,0, QtWidgets.QTableWidgetItem(str(course)))
+                self.row+=0
 
 
 
