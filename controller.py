@@ -113,12 +113,29 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
     # <---------------------------------- Search/Look-up functions ---------------------------------------------------->
 
     def search_button(self):
-        self.listView.clearSelection()
+
+
         if self.stdnt_radioButton.isChecked():
-            self.input_vals=self.stdnt_tchr_ID_lineEdit.text()
-            self.stdnt_data=self.db.search_student(self.input_vals[0])
-            self.listView.addItems(self.stdnt_data[0])
-            self.listView.addItems(self.stdnt_data[1])
+            self.tableWidget.insertRow(0)
+            self.input_vals=int(self.stdnt_tchr_ID_lineEdit.text())
+            self.stdnt_data=self.db.search_student(self.input_vals) # Returns 2 lists, [0] is desired data
+            self.tableWidget.setColumnCount(len(self.stdnt_data[0][0]))
+            print(self.stdnt_data[0][0])
+            self.columns=self.stdnt_data[0][0] # returns tuple of stdnt dataß
+
+            self.id=self.stdnt_data[0][0][0]
+            self.tableWidget.setItem(0,0,QtWidgets.QTableWidgetItem(str(self.id)))
+
+            # for column in self.columns:
+            #     for data in self.stdnt_data[0][0]:
+            #         self.tableWidget.setItem(0, column, QtWidgets.QTableWidgetItem(str(data)))
+
+
+
+
+
+
+
 
         elif self.tchr_radioButton.isChecked():
             self.input_vals=self.persons_vals()
@@ -132,7 +149,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.listView.addItems(self.course_data[0])
             self.listView.addItems(self.course_data[1])
 
-        self.listView.show()
+
 
 
 if __name__ == "__main__":
