@@ -116,22 +116,19 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
 
 
         if self.stdnt_radioButton.isChecked():
+            # Clear table
             self.tableWidget.clear()
+
+            # Retrieve data
             self.input_vals=int(self.stdnt_tchr_ID_lineEdit.text())
             self.stdnt_data=self.db.search_student(self.input_vals) # Returns 2 lists, [0] is desired data
 
+            # Set up tableWidget rows and columns
             self.tableWidget.setColumnCount(len(self.stdnt_data[0][0]))
             self.tableWidget.insertRow(0)
 
-            print(self.stdnt_data[0][0])
-            self.columns=self.stdnt_data[0][0] # returns tuple of stdnt data
-
-            self.id=self.stdnt_data[0][0][0]
-            self.tableWidget.setItem(0,0,QtWidgets.QTableWidgetItem(str(self.id)))
-
+            # Display data
             self.i=0
-
-
             for data in self.stdnt_data[0][0]:
                 self.tableWidget.setItem(0, self.i, QtWidgets.QTableWidgetItem(str(data)))
                 self.i+=1
