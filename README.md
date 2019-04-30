@@ -4,7 +4,7 @@ A client-user friendly database application.
 ### Status: incomplete
 
 ## Front-end Design
-<img width="798" alt="Screen Shot 2019-03-19 at 5 00 19 PM" src="https://user-images.githubusercontent.com/23427623/54644977-bc6fab80-4a68-11e9-9f86-31ed24a026b7.png">
+![system_image](https://user-images.githubusercontent.com/23427623/56934890-9b609880-6ab3-11e9-9fd9-bf776af9c81d.png)
 
 
 ## Database Schema (ERD)
