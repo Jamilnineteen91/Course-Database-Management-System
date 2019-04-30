@@ -113,12 +113,10 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
     # <---------------------------------- Search/Look-up functions ---------------------------------------------------->
 
     def search_button(self):
-
+        # Clear table
+        self.tableWidget.clear()
 
         if self.stdnt_radioButton.isChecked():
-            # Clear table
-            self.tableWidget.clear()
-
             # Retrieve data
             self.stdnt_data=self.db.search_student(int(self.stdnt_tchr_ID_lineEdit.text())) # Returns 2 lists, [0] is desired data
 
@@ -135,7 +133,45 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.row=0
             for course in self.stdnt_data[1][0]:
                 self.tableWidget.setItem(self.row,0, QtWidgets.QTableWidgetItem(str(course)))
-                self.row+=0
+                self.row+=1
+
+        elif self.tchr_radioButtonisChecked():
+            # Retrieve data
+            self.tchr_data = self.db.search_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))  # Returns 2 lists, [0] is desired data
+
+            # Set up tableWidget rows and columns
+            self.tableWidget.setColumnCount(len(self.tchr_data[0][0]))
+            self.tableWidget.insertRow(0)
+
+            # Display data
+            self.column = 0
+            for data in self.tchr_data[0][0]:
+                self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
+                self.column += 1
+
+            self.row = 0
+            for course in self.tchr_data[1][0]:
+                self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(course)))
+                self.row += 1
+
+        elif self.crs_radioButtonisChecked():
+            # Retrieve data
+            self.crs_data = self.db.search_course(int(self.course_id_lineEdit.text()))  # Returns 2 lists, [0] is desired data
+
+            # Set up tableWidget rows and columns
+            self.tableWidget.setColumnCount(len(self.crs_data[0][0]))
+            self.tableWidget.insertRow(0)
+
+            # Display data
+            self.column = 0
+            for data in self.crs_data[0][0]:
+                self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
+                self.column += 1
+
+            self.row = 0
+            for student in self.crs_data[1][0]:
+                self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(student)))
+                self.row += 1
 
 
 
