@@ -51,7 +51,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             else:
                 return True
 
-    def clear(self):
+    def clearFields(self):
         self.stdnt_tchr_ID_lineEdit.clear()
         self.first_name_lineEdit.clear()
         self.last_name_lineEdit.clear()
@@ -74,32 +74,30 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
 
     # <------------------------------------------ Add functions ---------------------------------------------------->
     def add_button(self):
-        if self.stdnt_radioButton.isChecked()==True:
+        if self.stdnt_radioButton.isChecked():
             self.stdnt_info=self.persons_vals()
             self.db.add_student(self.stdnt_info[0],self.stdnt_info[1],self.stdnt_info[2],self.stdnt_info[3],self.stdnt_info[4],self.stdnt_info[5],self.stdnt_info[6],self.stdnt_info[7],self.stdnt_info[8],self.stdnt_info[9])
 
 
-        elif self.tchr_radioButton.isChecked()==True:
+        elif self.tchr_radioButton.isChecked():
             self.tchr_info=self.persons_vals()
             self.db.add_teacher(self.tchr_info[0],self.tchr_info[1],self.tchr_info[2],self.tchr_info[3],self.tchr_info[4],self.tchr_info[5],self.tchr_info[6],self.tchr_info[7],self.tchr_info[8],self.tchr_info[9])
 
 
-        elif self.crs_radioButton.isChecked()==True:
+        elif self.crs_radioButton.isChecked():
             self.crs_info=self.course_vals()
             self.db.add_course(self.crs_info[0],self.crs_info[1],self.crs_info[2],self.crs_info[3])
 
 
-        elif self.enroll_radioButton.isChecked()==True:
+        elif self.enroll_radioButton.isChecked():
             self.enroll_info=self.self.enroll_vals()
             self.db.enroll(self.enroll_info[0],self.enroll_info[1],self.enroll_info[2])
-
-        print('Worked!')
+        self.clearFields()
 
     # <------------------------------------- Deletion functions ------------------------------------------------------->
     def delete_button(self):
         if self.stdnt_radioButton.isChecked() == True:
             self.db.delete_student(int(self.stdnt_tchr_ID_lineEdit.text()))
-            self.clear()
             print('worked!')
 
         elif self.tchr_radioButton.isChecked() == True:
@@ -130,12 +128,13 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
                 self.column+=1
 
-            self.row=0
-            for course in self.stdnt_data[1][0]:
-                self.tableWidget.setItem(self.row,0, QtWidgets.QTableWidgetItem(str(course)))
-                self.row+=1
+            if len(self.stdnt_data[1])!=0:
+                self.row=0
+                for course in self.stdnt_data[1][0]:
+                    self.tableWidget.setItem(self.row,0, QtWidgets.QTableWidgetItem(str(course)))
+                    self.row+=1
 
-        elif self.tchr_radioButtonisChecked():
+        elif self.tchr_radioButton.isChecked():
             # Retrieve data
             self.tchr_data = self.db.search_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))  # Returns 2 lists, [0] is desired data
 
@@ -149,14 +148,15 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
                 self.column += 1
 
-            self.row = 0
-            for course in self.tchr_data[1][0]:
-                self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(course)))
-                self.row += 1
+            if len(self.tchr_data[1])!=0:
+                self.row = 0
+                for course in self.tchr_data[1][0]:
+                    self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(course)))
+                    self.row += 1
 
-        elif self.crs_radioButtonisChecked():
+        elif self.crs_radioButton.isChecked():
             # Retrieve data
-            self.crs_data = self.db.search_course(int(self.course_id_lineEdit.text()))  # Returns 2 lists, [0] is desired data
+            self.crs_data = self.db.search_course(str(self.course_id_lineEdit.text()))  # Returns 2 lists, [0] is desired data
 
             # Set up tableWidget rows and columns
             self.tableWidget.setColumnCount(len(self.crs_data[0][0]))
@@ -168,30 +168,11 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
                 self.column += 1
 
-            self.row = 0
-            for student in self.crs_data[1][0]:
-                self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(student)))
-                self.row += 1
-
-
-
-
-
-
-
-
-
-        elif self.tchr_radioButton.isChecked():
-            self.input_vals=self.persons_vals()
-            self.tchr_data = self.db.search_teacher(self.input_vals[0])
-            self.listView.addItems(self.tchr_data[0])
-            self.listView.addItems(self.tchr_data[1])
-
-        elif self.crs_radioButton.isChecked():
-            self.input_vals=self.course_vals()
-            self.course_data=self.db.search_course(self.input_vals[0])
-            self.listView.addItems(self.course_data[0])
-            self.listView.addItems(self.course_data[1])
+            if len(self.crs_data[1]) != 0:
+                self.row = 0
+                for student in self.crs_data[1][0]:
+                    self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(student)))
+                    self.row += 1
 
 
 
