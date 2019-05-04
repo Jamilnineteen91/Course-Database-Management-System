@@ -12,7 +12,6 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
 
         # Button connections.
         self.add_pushButton.clicked.connect(self.add_button)
-        self.add_pushButton.clicked.connect(self.clear)
         self.delete_pushButton.clicked.connect(self.delete_button)
         self.search_pushButton.clicked.connect(self.search_button)
 
@@ -90,23 +89,21 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
 
 
         elif self.enroll_radioButton.isChecked():
-            self.enroll_info=self.self.enroll_vals()
+            self.enroll_info=self.enroll_vals()
             self.db.enroll(self.enroll_info[0],self.enroll_info[1],self.enroll_info[2])
+
         self.clearFields()
 
     # <------------------------------------- Deletion functions ------------------------------------------------------->
     def delete_button(self):
         if self.stdnt_radioButton.isChecked() == True:
             self.db.delete_student(int(self.stdnt_tchr_ID_lineEdit.text()))
-            print('worked!')
 
         elif self.tchr_radioButton.isChecked() == True:
             self.db.delete_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))
-            self.clear()
 
         elif self.crs_radioButton.isChecked() == True:
             self.db.delete_course(str(self.course_id_lineEdit.text()))
-            self.clear()
 
     # <---------------------------------- Search/Look-up functions ---------------------------------------------------->
 
@@ -118,18 +115,20 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             # Retrieve data
             self.stdnt_data=self.db.search_student(int(self.stdnt_tchr_ID_lineEdit.text())) # Returns 2 lists, [0] is desired data
 
-            # Set up tableWidget rows and columns
-            self.tableWidget.setColumnCount(len(self.stdnt_data[0][0]))
-            self.tableWidget.insertRow(0)
+            if len(self.stdnt_data[0])!=0:
+                # Set up tableWidget rows and columns
+                self.tableWidget.setColumnCount(len(self.stdnt_data[0][0]))
+                self.tableWidget.insertRow(0)
 
-            # Display data
-            self.column=0
-            for data in self.stdnt_data[0][0]:
-                self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
-                self.column+=1
+                # Display data
+                self.column=0
+                for data in self.stdnt_data[0][0]:
+                    self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
+                    self.column+=1
 
             if len(self.stdnt_data[1])!=0:
-                self.row=0
+                self.row=1
+                print(self.stdnt_data[1][0])
                 for course in self.stdnt_data[1][0]:
                     self.tableWidget.setItem(self.row,0, QtWidgets.QTableWidgetItem(str(course)))
                     self.row+=1
@@ -138,18 +137,19 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             # Retrieve data
             self.tchr_data = self.db.search_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))  # Returns 2 lists, [0] is desired data
 
-            # Set up tableWidget rows and columns
-            self.tableWidget.setColumnCount(len(self.tchr_data[0][0]))
-            self.tableWidget.insertRow(0)
+            if len(self.tchr_data[0]) != 0:
+                # Set up tableWidget rows and columns
+                self.tableWidget.setColumnCount(len(self.tchr_data[0][0]))
+                self.tableWidget.insertRow(0)
 
-            # Display data
-            self.column = 0
-            for data in self.tchr_data[0][0]:
-                self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
-                self.column += 1
+                # Display data
+                self.column = 0
+                for data in self.tchr_data[0][0]:
+                    self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
+                    self.column += 1
 
             if len(self.tchr_data[1])!=0:
-                self.row = 0
+                self.row = 1
                 for course in self.tchr_data[1][0]:
                     self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(course)))
                     self.row += 1
@@ -158,22 +158,22 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             # Retrieve data
             self.crs_data = self.db.search_course(str(self.course_id_lineEdit.text()))  # Returns 2 lists, [0] is desired data
 
-            # Set up tableWidget rows and columns
-            self.tableWidget.setColumnCount(len(self.crs_data[0][0]))
-            self.tableWidget.insertRow(0)
+            if len(self.crs_data[0]) != 0:
+                # Set up tableWidget rows and columns
+                self.tableWidget.setColumnCount(len(self.crs_data[0][0]))
+                self.tableWidget.insertRow(0)
 
-            # Display data
-            self.column = 0
-            for data in self.crs_data[0][0]:
-                self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
-                self.column += 1
+                # Display data
+                self.column = 0
+                for data in self.crs_data[0][0]:
+                    self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
+                    self.column += 1
 
             if len(self.crs_data[1]) != 0:
-                self.row = 0
+                self.row = 1
                 for student in self.crs_data[1][0]:
                     self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(student)))
                     self.row += 1
-
 
 
 
