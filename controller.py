@@ -14,6 +14,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
         self.add_pushButton.clicked.connect(self.add_button)
         self.delete_pushButton.clicked.connect(self.delete_button)
         self.search_pushButton.clicked.connect(self.search_button)
+        self.update_pushButton.clicked.connect(self.update_button)
 
 
     # <------------------------------------------- GUI Tools ------------------------------------------------------>
@@ -126,18 +127,18 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                     self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
                     self.column+=1
 
-            if len(self.stdnt_data[1])!=0:
-                self.row=1
-                print(self.stdnt_data[1][0])
-                for course in self.stdnt_data[1][0]:
-                    self.tableWidget.setItem(self.row,0, QtWidgets.QTableWidgetItem(str(course)))
-                    self.row+=1
+                if len(self.stdnt_data[1])!=0:
+                    self.row=1
+                    for course in self.stdnt_data[1]:
+                        self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(course)))
+                        self.row+=1
+                        print(course)
 
         elif self.tchr_radioButton.isChecked():
             # Retrieve data
             self.tchr_data = self.db.search_teacher(int(self.stdnt_tchr_ID_lineEdit.text()))  # Returns 2 lists, [0] is desired data
 
-            if len(self.tchr_data[0]) != 0:
+            if self.tchr_data != None:
                 # Set up tableWidget rows and columns
                 self.tableWidget.setColumnCount(len(self.tchr_data[0][0]))
                 self.tableWidget.insertRow(0)
@@ -148,11 +149,12 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                     self.tableWidget.setItem(0, self.column, QtWidgets.QTableWidgetItem(str(data)))
                     self.column += 1
 
-            if len(self.tchr_data[1])!=0:
-                self.row = 1
-                for course in self.tchr_data[1][0]:
-                    self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(course)))
-                    self.row += 1
+                if len(self.tchr_data[1])!=0:
+                    self.row = 1
+                    for course in self.tchr_data[1][0]:
+                        self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(course)))
+                        self.row += 1
+
 
         elif self.crs_radioButton.isChecked():
             # Retrieve data
@@ -174,6 +176,64 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 for student in self.crs_data[1][0]:
                     self.tableWidget.setItem(self.row, 0, QtWidgets.QTableWidgetItem(str(student)))
                     self.row += 1
+
+    def update_button(self):
+        if self.stdnt_radioButton.isChecked():
+            attr={
+                0:'student_id',
+                1:'first_name',
+                2:'last_name',
+                3:'gender',
+                4:'address',
+                5:'city',
+                6:'country',
+                7:'zip',
+                8:'phone_number'
+            }
+            vals=self.persons_vals()
+            for i in vals:
+                if i != None:
+                    self.update_student(vals[0],attr[i],vals[i])
+
+        elif self.tchr_radioButton.isChecked():
+            attr={
+                0:'teacher_id',
+                1:'first_name',
+                2:'last_name',
+                3:'gender',
+                4:'address',
+                5:'city',
+                6:'country',
+                7:'zip',
+                8:'phone_number'
+            }
+            vals=self.persons_vals()
+            for i in vals:
+                if i != None:
+                    self.update_teacher(vals[0],attr[i],vals[i])
+
+        elif self.crs_radioButton.isChecked():
+            attr={
+                0:'course_id',
+                1:'course_name',
+                2:'description',
+                3:'teacher_id'
+            }
+            vals=self.persons_vals()
+            for i in vals:
+                if i != None:
+                    self.update_course(vals[0],attr[i],vals[i])
+
+        elif self.enroll_radioButton.isChecked():
+            attr={
+                0:'student_id',
+                1:'course_id',
+                2:'grade'
+            }
+            vals=self.persons_vals()
+            for i in vals:
+                if i != None:
+                    self.update_enrollment(vals[0],attr[i],vals[i])
 
 
 
