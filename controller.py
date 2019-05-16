@@ -190,10 +190,10 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 7:'zip',
                 8:'phone_number'
             }
-            vals=self.persons_vals()
-            for i in vals:
+            self.vals=self.persons_vals()
+            for i in self.vals:
                 if i != None:
-                    self.update_student(vals[0],attr[i],vals[i])
+                    self.update_student(self.vals[0],attr[i],self.vals[i])
 
         elif self.tchr_radioButton.isChecked():
             attr={
@@ -207,10 +207,10 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 7:'zip',
                 8:'phone_number'
             }
-            vals=self.persons_vals()
-            for i in vals:
+            self.vals=self.persons_vals()
+            for i in self.vals:
                 if i != None:
-                    self.update_teacher(vals[0],attr[i],vals[i])
+                    self.update_teacher(self.vals[0],attr[i],self.vals[i])
 
         elif self.crs_radioButton.isChecked():
             attr={
@@ -219,10 +219,10 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 2:'description',
                 3:'teacher_id'
             }
-            vals=self.persons_vals()
-            for i in vals:
+            self.vals=self.persons_vals()
+            for i in self.vals:
                 if i != None:
-                    self.update_course(vals[0],attr[i],vals[i])
+                    self.update_course(self.vals[0],attr[i],self.vals[i])
 
         elif self.enroll_radioButton.isChecked():
             attr={
@@ -230,10 +230,10 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 1:'course_id',
                 2:'grade'
             }
-            vals=self.persons_vals()
-            for i in vals:
+            self.vals=self.persons_vals()
+            for i in self.vals:
                 if i != None:
-                    self.update_enrollment(vals[0],attr[i],vals[i])
+                    self.update_enrollment(self.vals[0],attr[i],self.vals[i])
 
 
 
