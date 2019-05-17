@@ -193,10 +193,15 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 }
             self.vals=self.persons_vals()
             print(self.vals)
-            for i in self.vals:
-                if i != None:
-                    print(i,self.vals[0],attr[i],self.vals[i])
-                    self.update_student(self.vals[0],attr[i],self.vals[i])
+            # for i in self.vals:
+            #     if i != None:
+            #         print(i,self.vals[0],attr[i],self.vals[i])
+            #         self.update_student(self.vals[0],attr[i],self.vals[i])
+            i=0
+            while i < len(self.vals):
+                if self.vals[i]!=0:
+                    print(i, self.vals[0], attr[i], self.vals[i])
+                    self.db.update_student(self.vals[0], attr[i], self.vals[i])
 
         elif self.tchr_radioButton.isChecked():
             attr={
@@ -214,7 +219,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.vals=self.persons_vals()
             for i in self.vals:
                 if i != None:
-                    self.update_teacher(self.vals[0],attr[i],self.vals[i])
+                    self.db.update_teacher(self.vals[0],attr[i],self.vals[i])
 
         elif self.crs_radioButton.isChecked():
             attr={
@@ -226,7 +231,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.vals=self.persons_vals()
             for i in self.vals:
                 if i != None:
-                    self.update_course(self.vals[0],attr[i],self.vals[i])
+                    self.db.update_course(self.vals[0],attr[i],self.vals[i])
 
         elif self.enroll_radioButton.isChecked():
             attr={
@@ -237,7 +242,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.vals=self.persons_vals()
             for i in self.vals:
                 if i != None:
-                    self.update_enrollment(self.vals[0],attr[i],self.vals[i])
+                    self.db.update_enrollment(self.vals[0],attr[i],self.vals[i])
 
 
 
