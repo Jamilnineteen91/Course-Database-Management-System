@@ -194,7 +194,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.vals=self.persons_vals()
             i=0
             while i < len(self.vals):
-                if self.vals[i]!=0:
+                if self.vals[i]!='':
                     print(i, self.vals[0], attr[i], self.vals[i])
                     self.db.update_student(self.vals[0], attr[i], self.vals[i])
                 i+=1
@@ -215,7 +215,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.vals=self.persons_vals()
             i=0
             while i < len(self.vals):
-                if self.vals[i] != 0:
+                if self.vals[i]!='':
                     self.db.update_student(self.vals[0], attr[i], self.vals[i])
                 i+=1
 
@@ -229,7 +229,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.vals=self.persons_vals()
             i=0
             while i < len(self.vals):
-                if self.vals[i] != 0:
+                if self.vals[i]!='':
                     self.db.update_student(self.vals[0], attr[i], self.vals[i])
                 i+=1
         elif self.enroll_radioButton.isChecked():
@@ -241,7 +241,7 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
             self.vals=self.persons_vals()
             i=0
             while i < len(self.vals):
-                if self.vals[i] != 0:
+                if self.vals[i]!='':
                     self.db.update_student(self.vals[0], attr[i], self.vals[i])
                 i+=1
 
