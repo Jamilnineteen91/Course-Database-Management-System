@@ -186,11 +186,13 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 3:'gender',
                 4:'address',
                 5:'city',
-                6:'country',
-                7:'zip',
-                8:'phone_number'
-            }
+                6:'region',
+                7:'country',
+                8:'zip',
+                9:'phone_number'
+                }
             self.vals=self.persons_vals()
+            print(self.vals)
             for i in self.vals:
                 if i != None:
                     print(i,self.vals[0],attr[i],self.vals[i])
@@ -204,9 +206,10 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 3:'gender',
                 4:'address',
                 5:'city',
-                6:'country',
-                7:'zip',
-                8:'phone_number'
+                6:'region',
+                7:'country',
+                8:'zip',
+                9:'phone_number'
             }
             self.vals=self.persons_vals()
             for i in self.vals:
