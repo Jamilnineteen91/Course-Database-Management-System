@@ -192,16 +192,12 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 9:'phone_number'
                 }
             self.vals=self.persons_vals()
-            print(self.vals)
-            # for i in self.vals:
-            #     if i != None:
-            #         print(i,self.vals[0],attr[i],self.vals[i])
-            #         self.update_student(self.vals[0],attr[i],self.vals[i])
             i=0
             while i < len(self.vals):
                 if self.vals[i]!=0:
                     print(i, self.vals[0], attr[i], self.vals[i])
                     self.db.update_student(self.vals[0], attr[i], self.vals[i])
+                i+=1
 
         elif self.tchr_radioButton.isChecked():
             attr={
@@ -217,9 +213,11 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 9:'phone_number'
             }
             self.vals=self.persons_vals()
-            for i in self.vals:
-                if i != None:
-                    self.db.update_teacher(self.vals[0],attr[i],self.vals[i])
+            i=0
+            while i < len(self.vals):
+                if self.vals[i] != 0:
+                    self.db.update_student(self.vals[0], attr[i], self.vals[i])
+                i+=1
 
         elif self.crs_radioButton.isChecked():
             attr={
@@ -229,10 +227,11 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 3:'teacher_id'
             }
             self.vals=self.persons_vals()
-            for i in self.vals:
-                if i != None:
-                    self.db.update_course(self.vals[0],attr[i],self.vals[i])
-
+            i=0
+            while i < len(self.vals):
+                if self.vals[i] != 0:
+                    self.db.update_student(self.vals[0], attr[i], self.vals[i])
+                i+=1
         elif self.enroll_radioButton.isChecked():
             attr={
                 0:'student_id',
@@ -240,9 +239,11 @@ class controller(QtWidgets.QMainWindow,Ui_MainWindow):
                 2:'grade'
             }
             self.vals=self.persons_vals()
-            for i in self.vals:
-                if i != None:
-                    self.db.update_enrollment(self.vals[0],attr[i],self.vals[i])
+            i=0
+            while i < len(self.vals):
+                if self.vals[i] != 0:
+                    self.db.update_student(self.vals[0], attr[i], self.vals[i])
+                i+=1
 
 
 
