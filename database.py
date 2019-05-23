@@ -36,7 +36,7 @@ class newDatabase():
 											region VARCHAR(30) NOT NULL,
 											country VARCHAR(30) NOT NULL,
 											zip VARCHAR(6) NOT NULL,
-											phone_number INT(20) DEFAULT (1111111));""")
+											phone_number INT(20) NULL);""")
 
 			self.cursor.execute("""CREATE TABLE IF NOT EXISTS teacher(
 											teacher_id INT(7) UNSIGNED PRIMARY KEY,
@@ -48,7 +48,7 @@ class newDatabase():
 											region VARCHAR(30) NOT NULL,
 											country VARCHAR(30) NOT NULL,
 											zip VARCHAR(6) NOT NULL,
-											phone_number INT(20) DEFAULT (1111111));""")
+											phone_number INT(20) NULL);""")
 
 			self.cursor.execute("""CREATE TABLE IF NOT EXISTS course(
 											course_id VARCHAR(7) NOT NULL PRIMARY KEY,
